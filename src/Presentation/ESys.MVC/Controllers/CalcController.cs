@@ -8,6 +8,7 @@ public class CalcController : Controller
     [NoDirectAccess]
     public IActionResult Index()
     {
+        ViewBag.SessionId = HttpContext.Session.Id;
         return View();
     }
 }
