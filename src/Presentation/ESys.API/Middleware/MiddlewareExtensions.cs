@@ -1,4 +1,4 @@
-﻿namespace ESys.Api.Middleware
+﻿namespace ESys.API.Middleware
 {
     public static class MiddlewareExtensions
     {

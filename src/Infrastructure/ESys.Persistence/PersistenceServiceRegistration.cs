@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using ESys.Application.Contracts.Persistence;
 using ESys.Persistence.Dapper.Repositories;
 using ESys.Application.Features;
+using ESys.Application.Services.FileUploadHandler;
+using ESys.Persistence.FileSystem;
 
 namespace ESys.Persistence;
 /// <summary>
@@ -15,6 +17,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IBizRepository, BizRepository>();
         services.AddScoped<IBizInitialUiRepository, BizInitialUiRepository>();
         services.AddScoped<IBizXmlRepository, BizXmlRepository>();
+        services.AddScoped<IFileUploadHandlerService, FileUploadHandlerService>();
+        
         return services;
     }
 

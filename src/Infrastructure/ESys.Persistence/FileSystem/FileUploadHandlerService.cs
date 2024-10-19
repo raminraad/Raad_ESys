@@ -1,38 +1,38 @@
 using ESys.Application.Exceptions;
-using ESys.Application.Services.FileHandler;
+using ESys.Application.Services.FileUploadHandler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
 namespace ESys.Persistence.FileSystem;
 
-public class UploadHandlerService : IUploadHandlerService
+public class FileUploadHandlerService : IFileUploadHandlerService
 {
-    private UploadHandlerConfig _uploadHandlerConfig;
+    private FileUploadHandlerConfig _fileUploadHandlerConfig;
 
-    public UploadHandlerConfig UploadHandlerConfig
+    public FileUploadHandlerConfig FileUploadHandlerConfig
     {
-        get => _uploadHandlerConfig;
-        set => _uploadHandlerConfig = value;
+        get => _fileUploadHandlerConfig;
+        set => _fileUploadHandlerConfig = value;
     }
 
-    public UploadHandlerService(IConfiguration configuration)
+    public FileUploadHandlerService(IConfiguration configuration)
     {
-        _uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<UploadHandlerConfig>();
+        _fileUploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadHandlerConfig>();
     }
 
     private bool IsFileValid(IFormFile file)
     {
         //Checking the file for extension validation
         var fileExtension = Path.GetExtension(file.FileName);
-        if (_uploadHandlerConfig.AcceptedExtensions.Count > 0 &&
-            !_uploadHandlerConfig.AcceptedExtensions.Contains(fileExtension))
+        if (_fileUploadHandlerConfig.AcceptedExtensions.Count > 0 &&
+            !_fileUploadHandlerConfig.AcceptedExtensions.Contains(fileExtension))
         {
             throw new FileUploadExtensionException(file);
         }
 
         //Checking the file for size validation
         long size = file.Length;
-        var sizeLimit = _uploadHandlerConfig.MaxSizeInMB * 1024 * 1024;
+        var sizeLimit = _fileUploadHandlerConfig.MaxSizeInMB * 1024 * 1024;
         if (size > sizeLimit)
         {
             throw new FileUploadSizeLimitException(file, sizeLimit);
@@ -49,7 +49,7 @@ public class UploadHandlerService : IUploadHandlerService
         //name changing
         var fileExtension = Path.GetExtension(file.FileName);
         var path = Path.Combine(Directory.GetCurrentDirectory(),
-            _uploadHandlerConfig.UploadRootDirectory, _uploadHandlerConfig.UploadChildDirectory);
+            _fileUploadHandlerConfig.UploadRootDirectory, _fileUploadHandlerConfig.UploadChildDirectory);
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
         var fileNewName = file.FileName.Remove(file.FileName.Length - fileExtension.Length);
         while (File.Exists(Path.Combine(path, fileNewName + fileExtension)))

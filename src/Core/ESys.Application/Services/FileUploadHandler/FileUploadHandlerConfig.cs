@@ -1,6 +1,6 @@
-namespace ESys.Application.Services.FileHandler;
+namespace ESys.Application.Services.FileUploadHandler;
 
-public class UploadHandlerConfig
+public class FileUploadHandlerConfig
 {
     public int MaxSizeInMB { get; set; } = 10;
     public List<string> AcceptedExtensions { get; set; } = [];

@@ -2,7 +2,7 @@
 using System.Text.Json;
 using ESys.Application.Exceptions;
 
-namespace ESys.Api.Middleware;
+namespace ESys.API.Middleware;
 
 /// <summary>
 /// Middleware for handling custom exceptions in request pipeline

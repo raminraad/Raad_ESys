@@ -1,21 +1,21 @@
-using ESys.Application.Services.FileHandler;
+using ESys.Application.Services.FileUploadHandler;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ESys.Api.Controllers;
+namespace ESys.API.Controllers;
 
 [ApiController]
 [Route("api/upload")]
 public class UploadController : ControllerBase
 {
-    private readonly IUploadHandlerService _uploadHandlerService;
-    private readonly UploadHandlerConfig _uploadHandlerConfig;
+    private readonly IFileUploadHandlerService _fileUploadHandlerService;
+    private readonly FileUploadHandlerConfig _fileUploadHandlerConfig;
 
-    public UploadController(IUploadHandlerService _uploadHandlerService,IConfiguration configuration)
+    public UploadController(IFileUploadHandlerService fileUploadHandlerService,IConfiguration configuration)
     {
-        this._uploadHandlerService = _uploadHandlerService;
-        var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<UploadHandlerConfig>() ;
+        this._fileUploadHandlerService = fileUploadHandlerService;
+        var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadHandlerConfig>() ;
         
-        _uploadHandlerConfig = uploadHandlerConfig;
+        _fileUploadHandlerConfig = uploadHandlerConfig;
     }
     
     [HttpPost()]
@@ -24,8 +24,8 @@ public class UploadController : ControllerBase
     {
         try
         {
-            _uploadHandlerService.UploadHandlerConfig.UploadChildDirectory = $"Biz\\{bizId}\\{orderId}";
-            return Ok(new{dxsfile=_uploadHandlerService.Upload(file)});
+            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Biz\\{bizId}\\{orderId}";
+            return Ok(new{dxsfile=_fileUploadHandlerService.Upload(file)});
         }
         catch (Exception e)
         {
@@ -39,8 +39,8 @@ public class UploadController : ControllerBase
     {
         try
         {
-            _uploadHandlerService.UploadHandlerConfig.UploadChildDirectory = $"Biz\\{bizId}\\{orderId}";
-            return Ok(_uploadHandlerService.Upload(files));
+            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Biz\\{bizId}\\{orderId}";
+            return Ok(_fileUploadHandlerService.Upload(files));
         }
         catch (Exception e)
         {

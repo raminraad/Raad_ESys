@@ -1,10 +1,23 @@
+using ESys.Application;
+using ESys.Libraries;
+using ESys.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
 
+#region Add referenced projects services
+
+var configuration = new ConfigurationBuilder().Build();
+builder.Services.AddApplicationServices();
+builder.Services.AddLibrariesServices();
+builder.Services.AddPersistenceServices(configuration);
+
+#endregion
+
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

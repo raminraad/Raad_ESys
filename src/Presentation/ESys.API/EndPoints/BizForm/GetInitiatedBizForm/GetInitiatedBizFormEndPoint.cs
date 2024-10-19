@@ -3,7 +3,7 @@ using ESys.Application.Features.BizForm.Queries.GetInitiatedBizForm;
 using FastEndpoints;
 using MediatR;
 
-namespace ESys.Api.EndPoints.BizForm.GetInitiatedBizForm
+namespace ESys.API.EndPoints.BizForm.GetInitiatedBizForm
 {
     /// <summary>
     /// End point for getting data needed for BizFrom initialization

@@ -4,7 +4,7 @@ using ESys.Application.Features.BizForm.Queries.GetCalculatedBizForm;
 using FastEndpoints;
 using MediatR;
 
-namespace ESys.Api.EndPoints.BizForm.GetCalculatedBizForm
+namespace ESys.API.EndPoints.BizForm.GetCalculatedBizForm
 {
     /// <summary>
     /// End point for getting data needed for initializing Biz form
