@@ -49,9 +49,9 @@ builder.Services.AddSwaggerGen();
 #region Add referenced projects services
 
 var configuration = new ConfigurationBuilder().Build();
-builder.Services.AddApplicationServices();
-builder.Services.AddLibrariesServices();
-builder.Services.AddPersistenceServices(configuration);
+builder.Services.AddEPaaSApplication();
+builder.Services.AddEPaasServices();
+builder.Services.AddEPaaSPersistence(configuration);
 
 #endregion
 

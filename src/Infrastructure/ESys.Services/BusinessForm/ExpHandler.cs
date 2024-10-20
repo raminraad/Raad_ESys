@@ -1,7 +1,7 @@
 using ESys.Application.Abstractions.Services.BusinessFormCalculation;
 using org.matheval;
 
-namespace ESys.Libraries.BusinessFormCalculation;
+namespace ESys.Libraries.BusinessForm;
 
 /// <summary>
 /// Includes services related to Exps

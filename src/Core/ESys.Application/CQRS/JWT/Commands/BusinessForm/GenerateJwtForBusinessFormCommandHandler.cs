@@ -20,6 +20,7 @@ public sealed class
         var apiIsValid = true;
         if (apiIsValid is false)
         {
+            // todo: create and throw exception
             return Task.FromResult(AuthenticationErrors.BusinessTokenHasBeenExpired);
         }
 

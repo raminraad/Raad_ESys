@@ -3,11 +3,12 @@ using ESys.Application.Abstractions.Persistence;
 using ESys.Application.Abstractions.Services.BusinessFormCalculation;
 using ESys.Application.Abstractions.Services.JSON;
 using ESys.Application.Exceptions;
+using ESys.Application.Statics;
 using ESys.Domain.Entities;
 using Newtonsoft.Json.Linq;
 using Expression = org.matheval.Expression;
 
-namespace ESys.Application.CQRS.BusinessForm;
+namespace ESys.Application.Abstractions.Services.BusinessForm;
 
 public class BusinessFormCalculator
 {

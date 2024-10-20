@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESys.Persistence", "src\Infrastructure\ESys.Persistence\ESys.Persistence.csproj", "{DA8893B7-67E3-4DB1-B27E-7AEB408F5346}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESys.Libraries", "src\Infrastructure\ESys.Libraries\ESys.Libraries.csproj", "{DE4741BE-A50A-4DA6-9987-6BF81A89B533}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESys.Services", "src\Infrastructure\ESys.Services\ESys.Services.csproj", "{DE4741BE-A50A-4DA6-9987-6BF81A89B533}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{65D08B15-DB6A-4E59-B325-505999995C8B}"
 EndProject

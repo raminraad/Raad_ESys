@@ -9,13 +9,15 @@ namespace ESys.Persistence;
 /// <summary>
 /// Extension methods needed for adding persistence layer services
 /// </summary>
-public static class PersistenceServiceRegistration
+public static class EPaaSPersistenceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddEPaaSPersistence(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IBusinessRepository, BusinessRepository>();
         services.AddScoped<IBusinessInitialUiRepository, BusinessInitialUiRepository>();
         services.AddScoped<IBusinessXmlRepository, BusinessXmlRepository>();
+        services.AddScoped<IBusinessAccountRepository, BusinessAccountRepository>();
+        services.AddScoped<ISystemCacheRepository, SystemCacheRepository>();
         services.AddScoped<IFileUploadService, FileUploadService>();
         
         return services;
