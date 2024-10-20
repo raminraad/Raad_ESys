@@ -1,8 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using ESys.Authentication.JWT.Commands.BusinessForm;
-using ESys.Authentication.Services;
+using ESys.Application.Abstractions.Services.JWT;
+using ESys.Application.CQRS.JWT.Commands.BusinessForm;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 

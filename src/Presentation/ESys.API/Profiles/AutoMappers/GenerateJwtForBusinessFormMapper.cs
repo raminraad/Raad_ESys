@@ -1,6 +1,6 @@
 using AutoMapper;
 using ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm;
-using ESys.Authentication.JWT.Commands.BusinessForm;
+using ESys.Application.CQRS.JWT.Commands.BusinessForm;
 
 namespace ESys.API.Profiles.AutoMappers;
 

@@ -1,4 +1,4 @@
-namespace ESys.Authentication.SharedKernel;
+namespace ESys.Application.SharedKernel;
 
 public static class AuthenticationErrors
 {

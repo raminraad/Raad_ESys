@@ -1,10 +1,8 @@
-using CSharpFunctionalExtensions;
-using ESys.Application.Abstractions.CQRS;
-using ESys.Authentication.Services;
-using ESys.Authentication.SharedKernel;
+using ESys.Application.Abstractions.Services.JWT;
+using ESys.Application.SharedKernel;
 using MediatR;
 
-namespace ESys.Authentication.JWT.Commands.BusinessForm;
+namespace ESys.Application.CQRS.JWT.Commands.BusinessForm;
 
 public sealed class
     GenerateJwtForBusinessFormCommandHandler : IRequestHandler<GenerateJwtForBusinessFormCommand, string>

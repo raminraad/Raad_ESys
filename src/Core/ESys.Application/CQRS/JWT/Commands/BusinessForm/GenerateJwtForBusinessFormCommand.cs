@@ -1,7 +1,6 @@
-using ESys.Application.Abstractions.CQRS;
 using MediatR;
 
-namespace ESys.Authentication.JWT.Commands.BusinessForm;
+namespace ESys.Application.CQRS.JWT.Commands.BusinessForm;
 
 public record GenerateJwtForBusinessFormCommand() : IRequest<string>
 {

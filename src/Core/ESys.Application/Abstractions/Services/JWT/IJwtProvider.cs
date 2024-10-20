@@ -1,6 +1,6 @@
-using ESys.Authentication.JWT.Commands.BusinessForm;
+using ESys.Application.CQRS.JWT.Commands.BusinessForm;
 
-namespace ESys.Authentication.Services;
+namespace ESys.Application.Abstractions.Services.JWT;
 
 public interface IJwtProvider
 {

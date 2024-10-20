@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ESys.Application\ESys.Application.csproj" />
-    <ProjectReference Include="..\..\Core\ESys.Authentication\ESys.Authentication.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ESys.Libraries\ESys.Libraries.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ESys.Persistence\ESys.Persistence.csproj" />
   </ItemGroup>

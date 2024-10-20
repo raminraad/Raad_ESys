@@ -6,10 +6,6 @@ using Scalar.AspNetCore;
 using ESys.Application;
 using ESys.Libraries;
 using ESys.API.Profiles.AutoMappers;
-using ESys.Authentication;
-using ESys.Authentication.JWT.Commands.BusinessForm;
-using FastEndpoints.Security;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,7 +50,6 @@ builder.Services.AddSwaggerGen();
 
 var configuration = new ConfigurationBuilder().Build();
 builder.Services.AddApplicationServices();
-builder.Services.AddAuthenticationServices();
 builder.Services.AddLibrariesServices();
 builder.Services.AddPersistenceServices(configuration);
 

@@ -1,6 +1,6 @@
 ﻿using ESys.Application.Abstractions.Services.BusinessFormCalculation;
 using ESys.Application.Abstractions.Services.JSON;
-using ESys.Authentication.Services;
+using ESys.Application.Abstractions.Services.JWT;
 using ESys.Libraries.BusinessFormCalculation;
 using ESys.Libraries.JSON;
 using ESys.Libraries.JWT;

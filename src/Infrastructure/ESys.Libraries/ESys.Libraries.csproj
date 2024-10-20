@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ESys.Application\ESys.Application.csproj" />
-    <ProjectReference Include="..\..\Core\ESys.Authentication\ESys.Authentication.csproj" />
     <ProjectReference Include="..\..\Core\ESys.Domain\ESys.Domain.csproj" />
   </ItemGroup>
 
