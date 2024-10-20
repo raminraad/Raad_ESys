@@ -40,7 +40,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
-                await SendAsync(resp);
+                await SendOkAsync(resp,ct);
 
             }
             catch (Exception e)

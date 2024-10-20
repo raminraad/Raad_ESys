@@ -1,4 +1,4 @@
-using ESys.Application.Abstractions.Services.FileUploadHandler;
+using ESys.Application.Abstractions.Services.FileUpload;
 using ESys.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

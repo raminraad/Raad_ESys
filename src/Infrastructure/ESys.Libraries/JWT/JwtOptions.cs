@@ -1,4 +1,4 @@
-namespace ESys.Libraries;
+namespace ESys.Libraries.JWT;
 
 public class JwtOptions
 {

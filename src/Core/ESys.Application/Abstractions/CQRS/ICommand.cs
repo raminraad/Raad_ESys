@@ -1,6 +1,8 @@
+using MediatR;
+
 namespace ESys.Application.Abstractions.CQRS;
 
-public interface ICommandBase
+public interface ICommandBase : IRequest
 {
 }
 

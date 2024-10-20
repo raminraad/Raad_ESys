@@ -1,4 +1,4 @@
-using ESys.Application.Abstractions.Services.FileUploadHandler;
+using ESys.Application.Abstractions.Services.FileUpload;
 using FastEndpoints;
 
 namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
@@ -41,7 +41,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
                 //
                 // return;
                 var fileName = _fileUploadService.Upload(file);
-            await SendAsync(new BusinessFormFileUploadResponse(){Dxsfile = fileName});
+            await SendOkAsync(new BusinessFormFileUploadResponse {Dxsfile = fileName},ct);
             }
         }
 

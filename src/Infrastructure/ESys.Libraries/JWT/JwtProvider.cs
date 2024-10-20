@@ -6,7 +6,7 @@ using ESys.Authentication.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ESys.Libraries;
+namespace ESys.Libraries.JWT;
 
 public sealed class JwtProvider : IJwtProvider
 {
@@ -16,13 +16,17 @@ public sealed class JwtProvider : IJwtProvider
     {
         _options = options.Value;
     }
+
     public string GenerateJwtForCalcForm(GenerateJwtForBusinessFormCommand req)
     {
         var claims = new Claim[]
         {
-            new(JwtRegisteredClaimNames.Sub,""), // todo: change to business holder name
-            new("client-session-id",req.ClientSessionId),
-            new("total-session-counter","200"), // todo: replace from db fetch
+            new(JwtRegisteredClaimNames.NameId, "dizmar"), //modified
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+
+            new(JwtRegisteredClaimNames.Sub, "Albert"), // todo: change to business holder name
+            new("client-session-id", req.ClientSessionId),
+            new("total-session-counter", "200"), // todo: replace from db fetch
         };
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(

@@ -1,5 +1,6 @@
 using System.Text;
 using ESys.Libraries;
+using ESys.Libraries.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

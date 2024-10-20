@@ -8,7 +8,7 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm
     /// <summary>
     /// End point for generating JWT on calculation form initial load
     /// </summary>
-    public class GenerateJwtForBusinessFormEndPoint : Endpoint<GenerateJwtForBusinessFormRequest, string>
+    public class GenerateJwtForBusinessFormEndPoint : Endpoint<GenerateJwtForBusinessFormRequest, GenerateJwtForBusinessFormResponse>
     {
         private readonly IMediator _mediator;
         private readonly AutoMapper.IMapper _mapper;
@@ -40,7 +40,7 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
-                await SendAsync(resp.ToString());
+                await SendOkAsync(new GenerateJwtForBusinessFormResponse {Token = resp},ct);
             }
             catch (Exception e)
             {

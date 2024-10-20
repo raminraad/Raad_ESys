@@ -1,5 +1,9 @@
 ﻿using ESys.Application.Abstractions.Services.BusinessFormCalculation;
-using ESys.Application.Abstractions.Services.JsonHandler;
+using ESys.Application.Abstractions.Services.JSON;
+using ESys.Authentication.Services;
+using ESys.Libraries.BusinessFormCalculation;
+using ESys.Libraries.JSON;
+using ESys.Libraries.JWT;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +15,7 @@ public static class LibrariesServiceRegisteration
     {
         services.AddScoped<IJsonHandler, JsonHandler>();
         services.AddScoped<IExpHandler, ExpHandler>();
+        services.AddScoped<IJwtProvider, JwtProvider>();
 
         return services;
     }

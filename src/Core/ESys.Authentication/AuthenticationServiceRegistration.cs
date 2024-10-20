@@ -4,17 +4,16 @@ using System.Reflection;
 using ESys.Application.Abstractions.Services.FileUpload;
 using ESys.Application.CQRS.BusinessForm;
 
-namespace ESys.Application;
+namespace ESys.Authentication;
 
 /// <summary>
-/// Extension methods needed for adding application layer services
+/// Extension methods needed for adding authentication layer services
 /// </summary>
-public static class ApplicationServiceRegistration
+public static class AuthenticationServiceRegistration
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddAuthenticationServices(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
         services.AddScoped<FileUploadConfigDto,FileUploadConfigDto>();
         services.AddScoped<BusinessFormCalculator>();
         services.AddScoped<BusinessFormInitiator>();

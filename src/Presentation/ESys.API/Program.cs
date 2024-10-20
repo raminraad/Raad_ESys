@@ -6,6 +6,9 @@ using Scalar.AspNetCore;
 using ESys.Application;
 using ESys.Libraries;
 using ESys.API.Profiles.AutoMappers;
+using ESys.Authentication;
+using ESys.Authentication.JWT.Commands.BusinessForm;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,17 +49,21 @@ builder.Services.AddFastEndpoints();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 #region Add referenced projects services
 
 var configuration = new ConfigurationBuilder().Build();
 builder.Services.AddApplicationServices();
+builder.Services.AddAuthenticationServices();
 builder.Services.AddLibrariesServices();
 builder.Services.AddPersistenceServices(configuration);
 
 #endregion
 
+#region AutoMapper
+
 builder.Services.AddAutoMapper(typeof(GenerateJwtForBusinessFormMapper));
+
+#endregion
 
 #region Jwt
 
@@ -84,6 +91,7 @@ app.UseHsts();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+
 // app.MapControllers();
 app.UseFastEndpoints(c => { c.Endpoints.RoutePrefix = "api"; });
 

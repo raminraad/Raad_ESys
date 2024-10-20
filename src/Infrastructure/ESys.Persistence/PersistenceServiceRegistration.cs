@@ -1,5 +1,5 @@
 ﻿using ESys.Application.Abstractions.Persistence;
-using ESys.Application.Abstractions.Services.FileUploadHandler;
+using ESys.Application.Abstractions.Services.FileUpload;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using ESys.Persistence.Dapper.Repositories;

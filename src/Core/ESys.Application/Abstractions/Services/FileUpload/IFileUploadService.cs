@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace ESys.Application.Abstractions.Services.FileUploadHandler;
+namespace ESys.Application.Abstractions.Services.FileUpload;
 
 public interface IFileUploadService
 {

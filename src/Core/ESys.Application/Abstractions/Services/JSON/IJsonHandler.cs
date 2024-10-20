@@ -1,4 +1,4 @@
-namespace ESys.Application.Abstractions.Services.JsonHandler;
+namespace ESys.Application.Abstractions.Services.JSON;
 
 public interface IJsonHandler
 {

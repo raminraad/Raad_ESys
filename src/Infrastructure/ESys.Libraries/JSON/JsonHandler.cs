@@ -1,6 +1,6 @@
-using ESys.Application.Abstractions.Services.JsonHandler;
+using ESys.Application.Abstractions.Services.JSON;
 
-namespace ESys.Libraries;
+namespace ESys.Libraries.JSON;
 
 /// <summary>
 /// Service provider for Json contents

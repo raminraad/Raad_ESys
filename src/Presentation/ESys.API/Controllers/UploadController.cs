@@ -1,4 +1,4 @@
-using ESys.Application.Abstractions.Services.FileUploadHandler;
+using ESys.Application.Abstractions.Services.FileUpload;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESys.API.Controllers;

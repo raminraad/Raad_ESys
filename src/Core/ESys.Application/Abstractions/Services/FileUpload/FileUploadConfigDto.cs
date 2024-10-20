@@ -1,4 +1,4 @@
-namespace ESys.Application.Abstractions.Services.FileUploadHandler;
+namespace ESys.Application.Abstractions.Services.FileUpload;
 
 public class FileUploadConfigDto
 {
