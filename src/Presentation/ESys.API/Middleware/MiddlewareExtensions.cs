@@ -6,5 +6,10 @@
         {
             return builder.UseMiddleware<ExceptionHandlerMiddleware>();
         }
+        
+        public static IApplicationBuilder UseCustomJwtMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<JwtMiddleware>();
+        }
     }
 }

@@ -8,6 +8,7 @@ using ESys.Libraries;
 using ESys.API.Profiles.AutoMappers;
 using ESys.Authentication;
 using ESys.Authentication.JWT.Commands.BusinessForm;
+using FastEndpoints.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -70,6 +71,7 @@ builder.Services.AddAutoMapper(typeof(GenerateJwtForBusinessFormMapper));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+// builder.Services.AddAuthenticationJwtBearer(s => s.SigningKey = "This-is-a-complicated-secret-key-for-EPaad-JWT-!@65#5$#6$%%5_^*1(0^&*(%_^6541&#$@!@_#55$321!@");
 
 #endregion
 
@@ -91,7 +93,7 @@ app.UseHsts();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
-
+// app.UseCustomJwtMiddleware();
 // app.MapControllers();
 app.UseFastEndpoints(c => { c.Endpoints.RoutePrefix = "api"; });
 

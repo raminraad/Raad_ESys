@@ -36,7 +36,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetInitialBusinessForm
                 await SendStringAsync(resp.Result, cancellation: ct);
             }
             catch (NotFoundException e)
-            {
+            { 
                 await SendNotFoundAsync(ct);
             }
         }

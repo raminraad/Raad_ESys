@@ -22,7 +22,9 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
         public override void Configure()
         {
             Post("/upload/businessform/single");
+            Claims("client-session-id");
             AllowFileUploads();
+            AllowAnonymous();
         }
 
         public override async Task HandleAsync(BusinessFormFileUploadRequest req, CancellationToken ct)
