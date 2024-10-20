@@ -1,17 +1,18 @@
 using System.Numerics;
-using ESys.Application.Contracts.Libraries;
-using ESys.Application.Contracts.Persistence;
+using ESys.Application.Abstractions.Persistence;
+using ESys.Application.Abstractions.Services.BusinessFormCalculation;
+using ESys.Application.Abstractions.Services.JsonHandler;
 using ESys.Application.Exceptions;
 using ESys.Domain.Entities;
 using Newtonsoft.Json.Linq;
 using Expression = org.matheval.Expression;
 
-namespace ESys.Application.Features.BusinessForm;
+namespace ESys.Application.CQRS.BusinessForm;
 
 public class BusinessFormCalculator
 {
     IBusinessRepository _businessRepository;
-    private readonly IJsonHelper _jsonHelper;
+    private readonly IJsonHandler _jsonHandler;
     private readonly IExpHelper _expHelper;
     private readonly IBusinessXmlRepository _businessXmlRepository;
 
@@ -25,11 +26,11 @@ public class BusinessFormCalculator
     private Business _business = new();
     
 
-    public BusinessFormCalculator(IBusinessRepository businessRepository, IJsonHelper jsonHelper, IExpHelper expHelper, IBusinessXmlRepository businessXmlRepository)
+    public BusinessFormCalculator(IBusinessRepository businessRepository, IJsonHandler jsonHandler, IExpHelper expHelper, IBusinessXmlRepository businessXmlRepository)
     {
         _businessXmlRepository = businessXmlRepository;
         _businessRepository = businessRepository;
-        _jsonHelper = jsonHelper;
+        _jsonHandler = jsonHandler;
         _expHelper = expHelper;
     }
 
@@ -61,7 +62,7 @@ public class BusinessFormCalculator
         foreach (var item in funcPool)
             ApplyFuncs(item.Value);
 
-        var result = _jsonHelper.ConvertKeyValuePairsToJson(_expHelper.ApplyExpsOnData(dataPool, expPool));
+        var result = _jsonHandler.ConvertKeyValuePairsToJson(_expHelper.ApplyExpsOnData(dataPool, expPool));
         return result;
     }
     
@@ -154,7 +155,7 @@ public class BusinessFormCalculator
             }
         }
 
-        FillJsonInDataPool(GetCalculatedBusinessForm(_jsonHelper.ConvertKeyValuePairsToJson(keyValuePairs)).Result);
+        FillJsonInDataPool(GetCalculatedBusinessForm(_jsonHandler.ConvertKeyValuePairsToJson(keyValuePairs)).Result);
     }
 
     /// <summary>

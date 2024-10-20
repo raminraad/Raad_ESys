@@ -1,8 +1,8 @@
-using ESys.Application.Contracts.Persistence;
+using ESys.Application.Abstractions.Persistence;
 using ESys.Application.Exceptions;
 using ESys.Domain.Entities;
 
-namespace ESys.Application.Features.BusinessForm;
+namespace ESys.Application.CQRS.BusinessForm;
 
 public class BusinessFormInitiator
 {

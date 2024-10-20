@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace ESys.Application.Features.BusinessForm.Queries.GetCalculatedBusinessForm;
+namespace ESys.Application.CQRS.BusinessForm.Queries.GetCalculatedBusinessForm;
 
 /// <summary>
 /// Request handler for BusinessForm calculation. This class is used by mediator

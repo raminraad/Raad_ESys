@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using ESys.Application.Contracts.Persistence;
-using ESys.Application.Contracts.Services.FileUploadHandler;
-using ESys.Application.Features.BusinessForm;
+using ESys.Application.Abstractions.Services.FileUploadHandler;
+using ESys.Application.CQRS.BusinessForm;
 
 namespace ESys.Application;
 

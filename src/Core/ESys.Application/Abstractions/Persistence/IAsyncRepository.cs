@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace ESys.Application.Contracts.Persistence;
+namespace ESys.Application.Abstractions.Persistence;
 public interface IAsyncRepository<T> where T : class
 {
     Task<T> GetByIdAsync(string id);

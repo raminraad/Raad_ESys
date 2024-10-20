@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using ESys.Application.Features.BusinessForm.Queries.GetCalculatedBusinessForm;
+using ESys.Application.CQRS.BusinessForm.Queries.GetCalculatedBusinessForm;
 using FastEndpoints;
 using MediatR;
 

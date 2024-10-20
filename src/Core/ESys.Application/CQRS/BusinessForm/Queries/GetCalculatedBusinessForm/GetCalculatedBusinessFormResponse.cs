@@ -1,4 +1,4 @@
-namespace ESys.Application.Features.BusinessForm.Queries.GetCalculatedBusinessForm;
+namespace ESys.Application.CQRS.BusinessForm.Queries.GetCalculatedBusinessForm;
 
 /// <summary>
 /// Response being sent back to client containing calculated data for Business Form

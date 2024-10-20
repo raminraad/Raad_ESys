@@ -1,4 +1,4 @@
-namespace ESys.Application.Contracts.Libraries;
+namespace ESys.Application.Abstractions.Services.BusinessFormCalculation;
 
 public interface IExpHelper
 {

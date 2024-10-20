@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace ESys.Application.Features.BusinessForm.Queries.GetInitialBusinessForm;
+namespace ESys.Application.CQRS.BusinessForm.Queries.GetInitialBusinessForm;
 
 /// <summary>
 /// Request handler for Business Form initialization. This class is used by mediator

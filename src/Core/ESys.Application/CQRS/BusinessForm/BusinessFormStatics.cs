@@ -1,4 +1,4 @@
-namespace ESys.Application.Features.BusinessForm;
+namespace ESys.Application.CQRS.BusinessForm;
 
 /// <summary>
 /// Contains static values needed for Business Form initialization and reevaluation

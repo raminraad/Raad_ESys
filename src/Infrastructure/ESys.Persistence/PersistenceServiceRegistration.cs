@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ESys.Application.Abstractions.Persistence;
+using ESys.Application.Abstractions.Services.FileUploadHandler;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using ESys.Application.Contracts.Persistence;
-using ESys.Application.Contracts.Services.FileUploadHandler;
 using ESys.Persistence.Dapper.Repositories;
-using ESys.Application.Features;
 using ESys.Persistence.FileSystem;
 
 namespace ESys.Persistence;

@@ -1,11 +1,11 @@
-using ESys.Application.Contracts.Libraries;
+using ESys.Application.Abstractions.Services.JsonHandler;
 
-namespace ESys.Libraries.Helpers;
+namespace ESys.Libraries;
 
 /// <summary>
 /// Service provider for Json contents
 /// </summary>
-public class JsonHelper : IJsonHelper
+public class JsonHandler : IJsonHandler
 {
     /// <summary>
     /// Converts a given key-value collection to a Json string

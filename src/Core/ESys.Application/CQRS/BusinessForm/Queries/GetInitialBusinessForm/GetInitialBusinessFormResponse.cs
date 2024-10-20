@@ -1,4 +1,4 @@
-namespace ESys.Application.Features.BusinessForm.Queries.GetInitialBusinessForm;
+namespace ESys.Application.CQRS.BusinessForm.Queries.GetInitialBusinessForm;
 
 /// <summary>
 /// Response being sent back to client containing initialization data for Business Form

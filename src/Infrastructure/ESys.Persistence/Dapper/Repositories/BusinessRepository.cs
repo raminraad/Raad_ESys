@@ -1,7 +1,7 @@
 using System.Data.SqlClient;
 using System.Numerics;
 using Dapper;
-using ESys.Application.Contracts.Persistence;
+using ESys.Application.Abstractions.Persistence;
 using ESys.Domain.Entities;
 using ESys.Persistence.Static;
 using Microsoft.Extensions.Configuration;
