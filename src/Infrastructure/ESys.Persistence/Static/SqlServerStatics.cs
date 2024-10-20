@@ -4,7 +4,7 @@ namespace ESys.Persistence.Static;
 /// </summary>
 public static class SqlServerStatics
 {
-    public static string BizTable => "dbo.tblBiz";
-    public static string XmlTable => "dbo.tblBizXmls";
-    public static string BizInitialUiTable => "dbo.tblUI";
+    public static string BusinessTable => "dbo.tblBiz";
+    public static string BusinessXmlTable => "dbo.tblBizXmls";
+    public static string BusinessInitialUiTable => "dbo.tblUI";
 }

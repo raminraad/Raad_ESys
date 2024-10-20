@@ -1,5 +1,5 @@
+using ESys.Application.Contracts.Services.FileUploadHandler;
 using ESys.Application.Exceptions;
-using ESys.Application.Services.FileUploadHandler;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
@@ -17,6 +17,7 @@ public class FileUploadHandlerService : IFileUploadHandlerService
 
     public FileUploadHandlerService(IConfiguration configuration)
     {
+        // todo: check if you can do this in DI container
         _fileUploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadHandlerConfig>();
     }
 

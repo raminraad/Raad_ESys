@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using ESys.Application.Contracts.Persistence;
-using ESys.Application.Features.BizForm;
-using ESys.Application.Services.FileUploadHandler;
+using ESys.Application.Contracts.Services.FileUploadHandler;
+using ESys.Application.Features.BusinessForm;
 
 namespace ESys.Application;
 
@@ -16,8 +16,8 @@ public static class ApplicationServiceRegistration
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         services.AddScoped<FileUploadHandlerConfig,FileUploadHandlerConfig>();
-        services.AddScoped<BizFormCalculator>();
-        services.AddScoped<BizFormInitiator>();
+        services.AddScoped<BusinessFormCalculator>();
+        services.AddScoped<BusinessFormInitiator>();
 
         return services;
     }

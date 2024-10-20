@@ -1,4 +1,4 @@
-using ESys.Application.Services.FileUploadHandler;
+using ESys.Application.Contracts.Services.FileUploadHandler;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESys.API.Controllers;
@@ -19,12 +19,12 @@ public class UploadController : ControllerBase
     }
     
     [HttpPost()]
-    [Route("biz/single/{bizId}/{orderId}")]
-    public IActionResult BizUploadSingle(IFormFile file,string bizId,string orderId)
+    [Route("business/single/{businessId}/{orderId}")] //todo: get proper parameters
+    public IActionResult BusinessFormUploadSingle(IFormFile file,string businessId,string orderId)
     {
         try
         {
-            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Biz\\{bizId}\\{orderId}";
+            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
             return Ok(new{dxsfile=_fileUploadHandlerService.Upload(file)});
         }
         catch (Exception e)
@@ -34,12 +34,12 @@ public class UploadController : ControllerBase
     }
     
     [HttpPost()]
-    [Route("biz/multiple/{bizId}/{orderId}")]
-    public IActionResult BizUploadMultiple(IEnumerable<IFormFile> files,string bizId,string orderId)
+    [Route("business/multiple/{businessId}/{orderId}")]
+    public IActionResult BusinessUploadMultiple(IEnumerable<IFormFile> files,string businessId,string orderId)
     {
         try
         {
-            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Biz\\{bizId}\\{orderId}";
+            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
             return Ok(_fileUploadHandlerService.Upload(files));
         }
         catch (Exception e)
