@@ -22,7 +22,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
         
         public override void Configure()
         {
-            Post("/upload/calc/single");
+            Post("/upload/businessform/single");
             AllowFileUploads();
         }
 

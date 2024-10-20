@@ -22,7 +22,7 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm
         public override void Configure()
         {
             Verbs(Http.POST);
-            Routes("/dyna");
+            Routes("/businessjwt");
             AllowAnonymous();
         }
         
