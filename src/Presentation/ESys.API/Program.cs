@@ -1,9 +1,12 @@
 using ESys.API.Middleware;
+using ESys.API.OptionsSetup;
 using ESys.Persistence;
 using FastEndpoints;
 using Scalar.AspNetCore;
 using ESys.Application;
 using ESys.Libraries;
+using ESys.API.Profiles.AutoMappers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +56,15 @@ builder.Services.AddPersistenceServices(configuration);
 
 #endregion
 
-builder.Services.AddAuthentication().AddJwtBearer();
+builder.Services.AddAutoMapper(typeof(GenerateJwtForBusinessFormMapper));
+
+#region Jwt
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+
+#endregion
 
 var app = builder.Build();
 

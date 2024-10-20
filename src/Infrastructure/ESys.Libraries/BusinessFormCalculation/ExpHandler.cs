@@ -6,7 +6,7 @@ namespace ESys.Libraries;
 /// <summary>
 /// Includes services related to Exps
 /// </summary>
-public class ExpHelper : IExpHelper
+public class ExpHandler : IExpHandler
 {
     /// <summary>
     /// Iterates over given Exps and applies them on a given data pool

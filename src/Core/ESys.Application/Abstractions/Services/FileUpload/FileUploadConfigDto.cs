@@ -1,6 +1,6 @@
 namespace ESys.Application.Abstractions.Services.FileUploadHandler;
 
-public class FileUploadHandlerConfig
+public class FileUploadConfigDto
 {
     public int MaxSizeInMB { get; set; } = 10;
     public List<string> AcceptedExtensions { get; set; } = [];

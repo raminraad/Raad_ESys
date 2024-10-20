@@ -1,8 +1,8 @@
-using ESys.Authentication.JWT.BusinessForm;
+using ESys.Authentication.JWT.Commands.BusinessForm;
 
 namespace ESys.Authentication.Services;
 
 public interface IJwtProvider
 {
-    string GenerateJwtForCalcForm(GenerateJwtForCalcFormCommand req);
+    string GenerateJwtForCalcForm(GenerateJwtForBusinessFormCommand req);
 }

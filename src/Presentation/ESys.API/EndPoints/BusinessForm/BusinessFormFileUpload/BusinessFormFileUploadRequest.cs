@@ -1,4 +1,4 @@
-namespace ESys.Application.Models;
+namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload;
 
 public class BusinessFormFileUploadRequest
 {

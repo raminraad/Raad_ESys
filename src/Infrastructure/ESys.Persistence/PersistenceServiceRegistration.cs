@@ -16,7 +16,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IBusinessRepository, BusinessRepository>();
         services.AddScoped<IBusinessInitialUiRepository, BusinessInitialUiRepository>();
         services.AddScoped<IBusinessXmlRepository, BusinessXmlRepository>();
-        services.AddScoped<IFileUploadHandlerService, FileUploadHandlerService>();
+        services.AddScoped<IFileUploadService, FileUploadService>();
         
         return services;
     }

@@ -1,21 +1,21 @@
-using CommandQuery;
 using CSharpFunctionalExtensions;
+using ESys.Application.Abstractions.CQRS;
 using ESys.Authentication.Services;
 using ESys.Authentication.SharedKernel;
 
-namespace ESys.Authentication.JWT.BusinessForm;
+namespace ESys.Authentication.JWT.Commands.BusinessForm;
 
 public sealed class
-    GenerateJwtForCalcFormCommandHandler : ICommandHandler<GenerateJwtForCalcFormCommand, string>
+    GenerateJwtForBusinessFormCommandHandler : ICommandHandler<GenerateJwtForBusinessFormCommand, string>
 {
     private readonly IJwtProvider _jwtProvider;
 
-    public GenerateJwtForCalcFormCommandHandler(IJwtProvider jwtProvider)
+    public GenerateJwtForBusinessFormCommandHandler(IJwtProvider jwtProvider)
     {
         _jwtProvider = jwtProvider;
     }
 
-    public async Task<string> HandleAsync(GenerateJwtForCalcFormCommand command, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(GenerateJwtForBusinessFormCommand command, CancellationToken cancellationToken)
     {
         // todo: check for API validity through repository
         var apiIsValid = true;

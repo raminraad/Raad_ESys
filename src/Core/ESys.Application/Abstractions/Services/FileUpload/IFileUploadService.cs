@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace ESys.Application.Abstractions.Services.FileUploadHandler;
 
-public interface IFileUploadHandlerService
+public interface IFileUploadService
 {
-    FileUploadHandlerConfig FileUploadHandlerConfig { set; get; }
+    FileUploadConfigDto FileUploadConfigDto { set; get; }
     string Upload(IFormFile file);
     IEnumerable<string> Upload(IEnumerable<IFormFile> files);
 

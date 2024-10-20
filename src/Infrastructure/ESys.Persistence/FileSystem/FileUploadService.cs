@@ -5,35 +5,35 @@ using Microsoft.Extensions.Configuration;
 
 namespace ESys.Persistence.FileSystem;
 
-public class FileUploadHandlerService : IFileUploadHandlerService
+public class FileUploadService : IFileUploadService
 {
-    private FileUploadHandlerConfig _fileUploadHandlerConfig;
+    private FileUploadConfigDto _fileUploadConfigDto;
 
-    public FileUploadHandlerConfig FileUploadHandlerConfig
+    public FileUploadConfigDto FileUploadConfigDto
     {
-        get => _fileUploadHandlerConfig;
-        set => _fileUploadHandlerConfig = value;
+        get => _fileUploadConfigDto;
+        set => _fileUploadConfigDto = value;
     }
 
-    public FileUploadHandlerService(IConfiguration configuration)
+    public FileUploadService(IConfiguration configuration)
     {
         // todo: check if you can do this in DI container
-        _fileUploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadHandlerConfig>();
+        _fileUploadConfigDto = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>();
     }
 
     private bool IsFileValid(IFormFile file)
     {
         //Checking the file for extension validation
         var fileExtension = Path.GetExtension(file.FileName);
-        if (_fileUploadHandlerConfig.AcceptedExtensions.Count > 0 &&
-            !_fileUploadHandlerConfig.AcceptedExtensions.Contains(fileExtension))
+        if (_fileUploadConfigDto.AcceptedExtensions.Count > 0 &&
+            !_fileUploadConfigDto.AcceptedExtensions.Contains(fileExtension))
         {
             throw new FileUploadExtensionException(file);
         }
 
         //Checking the file for size validation
         long size = file.Length;
-        var sizeLimit = _fileUploadHandlerConfig.MaxSizeInMB * 1024 * 1024;
+        var sizeLimit = _fileUploadConfigDto.MaxSizeInMB * 1024 * 1024;
         if (size > sizeLimit)
         {
             throw new FileUploadSizeLimitException(file, sizeLimit);
@@ -50,7 +50,7 @@ public class FileUploadHandlerService : IFileUploadHandlerService
         //name changing
         var fileExtension = Path.GetExtension(file.FileName);
         var path = Path.Combine(Directory.GetCurrentDirectory(),
-            _fileUploadHandlerConfig.UploadRootDirectory, _fileUploadHandlerConfig.UploadChildDirectory);
+            _fileUploadConfigDto.UploadRootDirectory, _fileUploadConfigDto.UploadChildDirectory);
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
         var fileNewName = file.FileName.Remove(file.FileName.Length - fileExtension.Length);
         while (File.Exists(Path.Combine(path, fileNewName + fileExtension)))

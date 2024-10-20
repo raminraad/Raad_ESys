@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ESys.Application\ESys.Application.csproj" />
+    <ProjectReference Include="..\..\Core\ESys.Authentication\ESys.Authentication.csproj" />
     <ProjectReference Include="..\..\Core\ESys.Domain\ESys.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
     <PackageReference Include="org.matheval" Version="1.0.0.3" />
   </ItemGroup>
 

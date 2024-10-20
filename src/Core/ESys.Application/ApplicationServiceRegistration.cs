@@ -14,7 +14,7 @@ public static class ApplicationServiceRegistration
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-        services.AddScoped<FileUploadHandlerConfig,FileUploadHandlerConfig>();
+        services.AddScoped<FileUploadConfigDto,FileUploadConfigDto>();
         services.AddScoped<BusinessFormCalculator>();
         services.AddScoped<BusinessFormInitiator>();
 

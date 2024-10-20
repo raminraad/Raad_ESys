@@ -13,7 +13,7 @@ public class BusinessFormCalculator
 {
     IBusinessRepository _businessRepository;
     private readonly IJsonHandler _jsonHandler;
-    private readonly IExpHelper _expHelper;
+    private readonly IExpHandler _expHandler;
     private readonly IBusinessXmlRepository _businessXmlRepository;
 
     //Q? what is Exp for?
@@ -26,12 +26,12 @@ public class BusinessFormCalculator
     private Business _business = new();
     
 
-    public BusinessFormCalculator(IBusinessRepository businessRepository, IJsonHandler jsonHandler, IExpHelper expHelper, IBusinessXmlRepository businessXmlRepository)
+    public BusinessFormCalculator(IBusinessRepository businessRepository, IJsonHandler jsonHandler, IExpHandler expHandler, IBusinessXmlRepository businessXmlRepository)
     {
         _businessXmlRepository = businessXmlRepository;
         _businessRepository = businessRepository;
         _jsonHandler = jsonHandler;
-        _expHelper = expHelper;
+        _expHandler = expHandler;
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ public class BusinessFormCalculator
         foreach (var item in funcPool)
             ApplyFuncs(item.Value);
 
-        var result = _jsonHandler.ConvertKeyValuePairsToJson(_expHelper.ApplyExpsOnData(dataPool, expPool));
+        var result = _jsonHandler.ConvertKeyValuePairsToJson(_expHandler.ApplyExpsOnData(dataPool, expPool));
         return result;
     }
     

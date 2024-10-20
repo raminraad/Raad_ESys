@@ -10,7 +10,7 @@ public static class LibrariesServiceRegisteration
     public static IServiceCollection AddLibrariesServices(this IServiceCollection services)
     {
         services.AddScoped<IJsonHandler, JsonHandler>();
-        services.AddScoped<IExpHelper, ExpHelper>();
+        services.AddScoped<IExpHandler, ExpHandler>();
 
         return services;
     }

@@ -1,5 +1,4 @@
 using ESys.Application.Abstractions.Services.FileUploadHandler;
-using ESys.Application.Models;
 using FastEndpoints;
 
 namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
@@ -9,14 +8,14 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
     /// </summary>
     public class BusinessFormFileUploadSingleEndPoint : Endpoint<BusinessFormFileUploadRequest,BusinessFormFileUploadResponse>
     {
-        private readonly IFileUploadHandlerService _fileUploadHandlerService;
-        private readonly FileUploadHandlerConfig _fileUploadHandlerConfig;
+        private readonly IFileUploadService _fileUploadService;
+        private readonly FileUploadConfigDto _fileUploadConfigDto;
 
-        public BusinessFormFileUploadSingleEndPoint(IFileUploadHandlerService fileUploadHandlerService,IConfiguration configuration)
+        public BusinessFormFileUploadSingleEndPoint(IFileUploadService fileUploadService,IConfiguration configuration)
         {
-            _fileUploadHandlerService = fileUploadHandlerService;
-            var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadHandlerConfig>() ;
-            _fileUploadHandlerConfig = uploadHandlerConfig ?? new();
+            _fileUploadService = fileUploadService;
+            var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>() ;
+            _fileUploadConfigDto = uploadHandlerConfig ?? new();
         }
 
         
@@ -28,7 +27,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
 
         public override async Task HandleAsync(BusinessFormFileUploadRequest req, CancellationToken ct)
         {
-                _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Biz\\{req.BusinessId}\\{req.OrderId}";
+                _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"Biz\\{req.BusinessId}\\{req.OrderId}";
             
             if (Files.Count > 0)
             {
@@ -41,7 +40,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
                 //     contentType: "image/png");
                 //
                 // return;
-                var fileName = _fileUploadHandlerService.Upload(file);
+                var fileName = _fileUploadService.Upload(file);
             await SendAsync(new BusinessFormFileUploadResponse(){Dxsfile = fileName});
             }
         }

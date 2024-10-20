@@ -5,17 +5,18 @@ namespace ESys.API.Controllers;
 
 [ApiController]
 [Route("api/upload")]
+//todo : remove unused controller
 public class UploadController : ControllerBase
 {
-    private readonly IFileUploadHandlerService _fileUploadHandlerService;
-    private readonly FileUploadHandlerConfig _fileUploadHandlerConfig;
+    private readonly IFileUploadService _fileUploadService;
+    private readonly FileUploadConfigDto _fileUploadConfigDto;
 
-    public UploadController(IFileUploadHandlerService fileUploadHandlerService,IConfiguration configuration)
+    public UploadController(IFileUploadService fileUploadService,IConfiguration configuration)
     {
-        this._fileUploadHandlerService = fileUploadHandlerService;
-        var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadHandlerConfig>() ;
+        this._fileUploadService = fileUploadService;
+        var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>() ;
         
-        _fileUploadHandlerConfig = uploadHandlerConfig;
+        _fileUploadConfigDto = uploadHandlerConfig;
     }
     
     [HttpPost()]
@@ -24,8 +25,8 @@ public class UploadController : ControllerBase
     {
         try
         {
-            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
-            return Ok(new{dxsfile=_fileUploadHandlerService.Upload(file)});
+            _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
+            return Ok(new{dxsfile=_fileUploadService.Upload(file)});
         }
         catch (Exception e)
         {
@@ -39,8 +40,8 @@ public class UploadController : ControllerBase
     {
         try
         {
-            _fileUploadHandlerService.FileUploadHandlerConfig.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
-            return Ok(_fileUploadHandlerService.Upload(files));
+            _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
+            return Ok(_fileUploadService.Upload(files));
         }
         catch (Exception e)
         {
