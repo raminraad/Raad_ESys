@@ -4,7 +4,7 @@ using MediatR;
 
 namespace ESys.Application.CQRS.JWT.Commands.BusinessForm;
 
-public sealed class
+public class
     GenerateJwtForBusinessFormCommandHandler : IRequestHandler<GenerateJwtForBusinessFormCommand, string>
 {
     private readonly IJwtProvider _jwtProvider;

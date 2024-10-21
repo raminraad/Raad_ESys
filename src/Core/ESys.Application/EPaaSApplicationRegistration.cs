@@ -22,11 +22,7 @@ public static class EPaaSApplicationRegistration
 
         #endregion
         
-        services.AddScoped<FileUploadConfigDto,FileUploadConfigDto>();
-        services.AddScoped<BusinessFormCalculator>();
-        services.AddScoped<BusinessFormInitiator>();
-
-        services.AddScoped<FileUploadConfigDto,FileUploadConfigDto>();
+        services.AddScoped<FileUploadConfigDto>();
         services.AddScoped<BusinessFormCalculator>();
         services.AddScoped<BusinessFormInitiator>();
 
