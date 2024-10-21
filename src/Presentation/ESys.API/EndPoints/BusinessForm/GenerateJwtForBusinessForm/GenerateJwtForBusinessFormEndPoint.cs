@@ -33,6 +33,8 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm
         /// <param name="ct">Cancellation token</param>
         public override async Task HandleAsync(GenerateJwtForBusinessFormRequest req, CancellationToken ct)
         {
+            var user = HttpContext.User;
+            
             try
             {
                 //todo: check if you can use fast end-points built-in mapper

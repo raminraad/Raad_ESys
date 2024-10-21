@@ -6,11 +6,12 @@ using Scalar.AspNetCore;
 using ESys.Application;
 using ESys.Libraries;
 using ESys.API.Profiles.AutoMappers;
+using FastEndpoints.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication();
 
 #region Development Cors
 
@@ -39,7 +40,6 @@ builder.Services.AddCors(options =>
 #endregion
 
 
-builder.Services.AddAuthorization();
 builder.Services.AddFastEndpoints();
 // builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -68,6 +68,16 @@ builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 // builder.Services.AddAuthenticationJwtBearer(s => s.SigningKey = "This-is-a-complicated-secret-key-for-EPaad-JWT-!@65#5$#6$%%5_^*1(0^&*(%_^6541&#$@!@_#55$321!@");
 
+
+builder.Services.AddAuthenticationJwtBearer(
+    _ =>
+    {
+        
+    },
+    _ =>
+    {
+    });
+builder.Services.AddAuthorization(o=>{o.AddPolicy("user",p=>p.RequireClaim("name"));});
 #endregion
 
 var app = builder.Build();
@@ -78,14 +88,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger(options => { options.RouteTemplate = "openapi/{documentName}.json"; });
     app.MapScalarApiReference();
     // app.UseSwaggerUI();
-    app.UseCors("ESysCorsPolicy");
+    // app.UseCors("ESysCorsPolicy");
 }
 
 app.UseHttpsRedirection();
 app.UseCustomExceptionHandler();
 app.UseHsts();
+// app.UseCustomExceptionHandler();
+// app.UseHsts();
 
-app.UseCors();
+// app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 // app.UseCustomJwtMiddleware();

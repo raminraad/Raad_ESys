@@ -18,6 +18,33 @@ public class JwtBearerOptionsSetup : IConfigureOptions<JwtBearerOptions>
 
     public void Configure(JwtBearerOptions options)
     {
+        options.Authority = _jwtOptions.Authority;
+        
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = async (context) =>
+            {
+                Console.WriteLine("Printing in the delegate OnAuthFailed");
+            },
+            OnChallenge = async (context) =>
+            {
+                Console.WriteLine("Printing in the delegate OnChallenge");
+
+                // this is a default method
+                // the response statusCode and headers are set here
+                context.HandleResponse();
+
+                // AuthenticateFailure property contains 
+                // the details about why the authentication has failed
+                if (context.AuthenticateFailure != null)
+                {
+                    context.Response.StatusCode = 401;
+
+                    // we can write our own custom response content here
+                    await context.HttpContext.Response.WriteAsync("Token Validation Has Failed. Request Access Denied");
+                }
+            }
+        };
         options.TokenValidationParameters = new()
         {
             ValidateIssuer = true,

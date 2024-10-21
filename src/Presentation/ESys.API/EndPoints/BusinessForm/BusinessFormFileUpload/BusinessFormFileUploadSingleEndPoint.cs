@@ -1,5 +1,6 @@
 using ESys.Application.Abstractions.Services.FileUpload;
 using FastEndpoints;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
 {
@@ -22,9 +23,9 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
         public override void Configure()
         {
             Post("/upload/businessform/single");
-            Claims("client-session-id");
+            Roles("admin");
             AllowFileUploads();
-            AllowAnonymous();
+            // AllowAnonymous();
         }
 
         public override async Task HandleAsync(BusinessFormFileUploadRequest req, CancellationToken ct)
