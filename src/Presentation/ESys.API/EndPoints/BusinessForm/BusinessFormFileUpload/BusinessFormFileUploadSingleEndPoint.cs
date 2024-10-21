@@ -23,7 +23,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
         public override void Configure()
         {
             Post("/upload/businessform/single");
-            Roles("admin");
+            Policies("user");
             AllowFileUploads();
             // AllowAnonymous();
         }

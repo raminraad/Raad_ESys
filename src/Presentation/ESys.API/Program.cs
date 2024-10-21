@@ -96,10 +96,10 @@ app.UseHttpsRedirection();
 // app.UseHsts();
 
 // app.UseCors();
+app.UseFastEndpoints(c => { c.Endpoints.RoutePrefix = "api";});
 app.UseAuthentication();
 app.UseAuthorization();
 // app.UseCustomJwtMiddleware();
 // app.MapControllers();
-app.UseFastEndpoints(c => { c.Endpoints.RoutePrefix = "api"; });
 
 app.Run();

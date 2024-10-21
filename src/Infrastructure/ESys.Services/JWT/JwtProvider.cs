@@ -26,52 +26,58 @@ public sealed class JwtProvider : IJwtProvider
 
     public string GenerateJwtForCalcForm(GenerateJwtForBusinessFormCommand req)
     {
-        // var claims = new Claim[]
-        // {
-        //     new(JwtRegisteredClaimNames.NameId, "my-name"), //todo: change to valid value
-        //     new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        //
-        //     new(JwtRegisteredClaimNames.Sub, "Albert"), // todo: change to business holder name
-        //     new("client-session-id", req.ClientSessionId),
-        //     new("total-session-counter", "200"), // todo: replace from db fetch
-        // };
-        // var token = new JwtSecurityToken(
-        //     _options.Issuer,
-        //     _options.Audience,
-        //     claims,
-        //     DateTime.UtcNow, // Not before
-        //     DateTime.UtcNow.AddHours(10), // Exp time
-        //     signingCredentials);
-        // string tokenValue = new JwtSecurityTokenHandler()
-        //     .WriteToken(token);
-        // return tokenValue;
         var claims = new Claim[]
         {
+            new(JwtRegisteredClaimNames.NameId, "my-name"), //todo: change to valid value
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        
+            new(JwtRegisteredClaimNames.Sub, "Albert"), // todo: change to business holder name
             new("client-session-id", req.ClientSessionId),
-            new("business-id", req.BusinessId),
-            new("counter","200")
+            new("total-session-counter", "200"), // todo: replace from db fetch
         };
-
-        
-        var jwt = JwtBearer.CreateToken(
-            o =>
-            {
-                o.SigningKey = "A_Secret_Token_Signing_Key_Longer_Than_32_Characters";
-                o.ExpireAt = DateTime.UtcNow.AddYears(10);
-            });
-
-        
-        
         var token = new JwtSecurityToken(
             _options.Issuer,
             _options.Audience,
             claims,
             DateTime.UtcNow, // Not before
-            DateTime.UtcNow.AddHours(1), // Exp time
+            DateTime.UtcNow.AddHours(10), // Exp time
             signingCredentials);
         string tokenValue = new JwtSecurityTokenHandler()
             .WriteToken(token);
-        return jwt;
+        return tokenValue;
+        
+        
+        
+        
+        
+        
+        // var claims = new Claim[]
+        // {
+        //     new("client-session-id", req.ClientSessionId),
+        //     new("business-id", req.BusinessId),
+        //     new("counter","200")
+        // };
+        //
+        //
+        // var jwt = JwtBearer.CreateToken(
+        //     o =>
+        //     {
+        //         o.SigningKey = "A_Secret_Token_Signing_Key_Longer_Than_32_Characters";
+        //         o.ExpireAt = DateTime.UtcNow.AddYears(10);
+        //     });
+        //
+        //
+        //
+        // var token = new JwtSecurityToken(
+        //     _options.Issuer,
+        //     _options.Audience,
+        //     claims,
+        //     DateTime.UtcNow, // Not before
+        //     DateTime.UtcNow.AddHours(1), // Exp time
+        //     signingCredentials);
+        // string tokenValue = new JwtSecurityTokenHandler()
+        //     .WriteToken(token);
+        // return jwt;
     }
 
     public string GenerateJwtForRedirectToBusinessForm(RedirectToBusinessFormJwtGenerationDto req)
