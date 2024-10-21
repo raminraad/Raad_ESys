@@ -92,8 +92,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCustomExceptionHandler();
-app.UseHsts();
 // app.UseCustomExceptionHandler();
 // app.UseHsts();
 
