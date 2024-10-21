@@ -2,8 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ESys.Application.Abstractions.Services.JWT;
+using ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
 using ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
-using ESys.Application.CQRS.JWT.Commands.BusinessForm;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -86,7 +86,7 @@ public sealed class JwtProvider : IJwtProvider
         {
             new("client-session-id", req.ClientSessionId),
             new("business-id", req.BusinessId),
-            new("counter", req.Counter)
+            new("counter", req.Counter??"0")
         };
 
         

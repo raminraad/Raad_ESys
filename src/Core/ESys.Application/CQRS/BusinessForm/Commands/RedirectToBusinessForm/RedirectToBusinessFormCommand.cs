@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
 
-public record RedirectToBusinessFormCommand() : IRequest<RedirectToBusinessFormResponse>
+public record RedirectToBusinessFormCommand() : IRequest<RedirectToBusinessFormCommandResult>
 {
     public required string BusinessId { get; set; }
     public required string BusinessToken { get; set; }

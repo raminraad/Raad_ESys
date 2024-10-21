@@ -4,5 +4,5 @@ namespace ESys.Persistence.Static;
 /// </summary>
 public static class SystemStatics
 {
-    public static string BusinessFormBaseUrl => "https://localhost:7183/calc";
+    public static string BusinessFormBaseUrl => "https://localhost:7183/businessform";
 }

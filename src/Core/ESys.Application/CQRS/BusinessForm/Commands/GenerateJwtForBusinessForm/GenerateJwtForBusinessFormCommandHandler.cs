@@ -3,7 +3,7 @@ using ESys.Application.Abstractions.Services.JWT;
 using ESys.Application.SharedKernel;
 using MediatR;
 
-namespace ESys.Application.CQRS.JWT.Commands.BusinessForm;
+namespace ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
 
 public class
     GenerateJwtForBusinessFormCommandHandler : IRequestHandler<GenerateJwtForBusinessFormCommand, string>

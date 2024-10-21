@@ -4,25 +4,24 @@ using ESys.Application.Abstractions.Services.JSON;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace ESys.Libraries.JSON;
+namespace ESys.MVC;
 
 /// <summary>
 /// Service provider for Json contents
 /// </summary>
-public class JsonHandler : IJsonHandler
+public class JsonHandler 
 {
-    private  readonly JsonSerializerOptions _options =
+    private static readonly JsonSerializerOptions _options =
         new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
 
-    public  void SimpleWrite(object obj, string fileName)
+    public static void SimpleWrite(object obj, string fileName)
     {
         var jsonString = JsonSerializer.Serialize(obj, _options);
         File.WriteAllText(fileName, jsonString);
     }
 
-    public  T SimpleRead<T>(string fileName)
+    public static T SimpleRead<T>(string fileName)
     {
-        
         string jsonData = File.ReadAllText(fileName);
         return JsonConvert.DeserializeObject<T>(jsonData);
     }

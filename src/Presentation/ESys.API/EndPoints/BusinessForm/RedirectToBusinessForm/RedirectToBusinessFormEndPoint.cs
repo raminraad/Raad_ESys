@@ -1,5 +1,5 @@
 using ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm;
-using ESys.Application.CQRS.JWT.Commands.BusinessForm;
+using ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
 using FastEndpoints;
 using MediatR;
 
@@ -35,11 +35,11 @@ namespace ESys.API.EndPoints.BusinessForm.RedirectToBusinessForm
         {
             try
             {
-                var mediatorReq = _mapper.Map<GenerateJwtForBusinessFormCommand>(req);
+                var mediatorReq = _mapper.Map<RedirectToBusinessFormCommand>(req);
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
-                await SendOkAsync(new RedirectToBusinessFormResponse {Token = resp},ct);
+                await SendOkAsync(_mapper.Map<RedirectToBusinessFormResponse>(resp),ct);
             }
             catch (Exception e)
             {

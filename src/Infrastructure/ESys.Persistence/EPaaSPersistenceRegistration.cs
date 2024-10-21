@@ -17,7 +17,7 @@ public static class EPaaSPersistenceRegistration
         services.AddScoped<IBusinessInitialUiRepository, BusinessInitialUiRepository>();
         services.AddScoped<IBusinessXmlRepository, BusinessXmlRepository>();
         services.AddScoped<IBusinessAccountRepository, BusinessAccountRepository>();
-        services.AddSingleton<ISystemCacheRepository, SystemCacheRepository>();
+        services.AddScoped<ISystemCacheRepository, SystemCacheRepository>();
         services.AddScoped<IFileUploadService, FileUploadService>();
         
         return services;

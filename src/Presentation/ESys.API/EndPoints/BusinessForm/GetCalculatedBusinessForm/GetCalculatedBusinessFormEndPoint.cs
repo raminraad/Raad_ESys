@@ -9,7 +9,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
     /// <summary>
     /// End point for getting data needed for initializing Business form
     /// </summary>
-    public class GetCalculatedBusinessFormEndPoint : Endpoint<List<JsonObject>,GetCalculatedBusinessFormResponse>
+    public class GetCalculatedBusinessFormEndPoint : Endpoint<List<JsonObject>,GetCalculatedBusinessFormQueryResult>
     {
         private readonly IMediator _mediator;
 

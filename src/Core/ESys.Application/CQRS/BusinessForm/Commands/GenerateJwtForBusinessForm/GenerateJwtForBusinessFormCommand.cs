@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace ESys.Application.CQRS.JWT.Commands.BusinessForm;
+namespace ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
 
 public record GenerateJwtForBusinessFormCommand() : IRequest<string>
 {

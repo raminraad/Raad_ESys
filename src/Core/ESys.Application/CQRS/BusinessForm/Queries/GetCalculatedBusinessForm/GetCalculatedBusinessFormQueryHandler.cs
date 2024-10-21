@@ -8,7 +8,7 @@ namespace ESys.Application.CQRS.BusinessForm.Queries.GetCalculatedBusinessForm;
 /// </summary>
 /// <param name="businessFormCalculator">Calculation provider gotten through dependency injection</param>
 public class GetCalculatedBusinessFormQueryHandler(BusinessFormCalculator businessFormCalculator)
-    : IRequestHandler<GetCalculatedBusinessFormQuery, GetCalculatedBusinessFormResponse>
+    : IRequestHandler<GetCalculatedBusinessFormQuery, GetCalculatedBusinessFormQueryResult>
 {
     /// <summary>
     /// Base method of request handling which gets run automatically by mediator
@@ -16,10 +16,10 @@ public class GetCalculatedBusinessFormQueryHandler(BusinessFormCalculator busine
     /// <param name="request">Request gotten from end point containing data needed for calculation service</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Corresponding response containing calculation data</returns>
-    public Task<GetCalculatedBusinessFormResponse> Handle(GetCalculatedBusinessFormQuery request,
+    public Task<GetCalculatedBusinessFormQueryResult> Handle(GetCalculatedBusinessFormQuery request,
         CancellationToken cancellationToken)
     {
-        var result = new GetCalculatedBusinessFormResponse()
+        var result = new GetCalculatedBusinessFormQueryResult()
         {
             Result = businessFormCalculator.GetCalculatedBusinessForm(request.Body).Result
         };

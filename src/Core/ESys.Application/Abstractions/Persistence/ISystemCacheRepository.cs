@@ -1,5 +1,4 @@
 using ESys.Application.Models;
-using ESys.Persistence.Dapper.Repositories;
 
 namespace ESys.Application.Abstractions.Persistence;
 

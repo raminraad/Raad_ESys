@@ -1,4 +1,4 @@
-namespace ESys.Persistence.Dapper.Repositories;
+namespace ESys.Domain.Entities;
 
 public class ClientSession
 {

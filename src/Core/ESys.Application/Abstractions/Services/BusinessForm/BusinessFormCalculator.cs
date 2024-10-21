@@ -5,6 +5,7 @@ using ESys.Application.Abstractions.Services.JSON;
 using ESys.Application.Exceptions;
 using ESys.Application.Statics;
 using ESys.Domain.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using Expression = org.matheval.Expression;
 
@@ -16,20 +17,23 @@ public class BusinessFormCalculator
     private readonly IJsonHandler _jsonHandler;
     private readonly IExpHandler _expHandler;
     private readonly IBusinessXmlRepository _businessXmlRepository;
+    private readonly IServiceProvider _serviceProvider;
 
     //Q? what is Exp for?
     private string Exp = @"len,*,wid,*,qty,*,qty";
-    
+
     private Dictionary<string, string> dataPool = new();
     private Dictionary<string, string> expPool = new();
     private Dictionary<string, string> funcPool = new();
     private Dictionary<string, string> lookupPool = new();
     private Business _business = new();
-    
 
-    public BusinessFormCalculator(IBusinessRepository businessRepository, IJsonHandler jsonHandler, IExpHandler expHandler, IBusinessXmlRepository businessXmlRepository)
+
+    public BusinessFormCalculator(IBusinessRepository businessRepository, IJsonHandler jsonHandler,
+        IExpHandler expHandler, IBusinessXmlRepository businessXmlRepository,IServiceProvider serviceProvider)
     {
         _businessXmlRepository = businessXmlRepository;
+        _serviceProvider = serviceProvider;
         _businessRepository = businessRepository;
         _jsonHandler = jsonHandler;
         _expHandler = expHandler;
@@ -66,7 +70,7 @@ public class BusinessFormCalculator
         var result = _jsonHandler.ConvertKeyValuePairsToJson(_expHandler.ApplyExpsOnData(dataPool, expPool));
         return result;
     }
-    
+
     /// <summary>
     /// Iterates over lookup pool and data pool, then fetches BusinessXml from repository and applies lookups on data
     /// </summary>
@@ -95,7 +99,7 @@ public class BusinessFormCalculator
                     lookupDic.Add(param.Key, expression.Eval().ToString());
                 }
                 catch
-                { 
+                {
                     // Ignore the occured error and get back to the rest of array
                 }
 
@@ -144,7 +148,8 @@ public class BusinessFormCalculator
             {
                 if ((string)param.Value[BusinessFormStatics.ExpTag] != null)
                 {
-                    expression.SetFomular(new string((string)param.Value[BusinessFormStatics.ExpTag]).Replace("\\\"", "\""));
+                    expression.SetFomular(
+                        new string((string)param.Value[BusinessFormStatics.ExpTag]).Replace("\\\"", "\""));
 
                     keyValuePairs.Add(param.Key, expression.Eval().ToString());
                     break;
@@ -156,7 +161,8 @@ public class BusinessFormCalculator
             }
         }
 
-        FillJsonInDataPool(GetCalculatedBusinessForm(_jsonHandler.ConvertKeyValuePairsToJson(keyValuePairs)).Result);
+        var innerCalculator = _serviceProvider.GetRequiredService<BusinessFormCalculator>();
+        FillJsonInDataPool(innerCalculator.GetCalculatedBusinessForm(_jsonHandler.ConvertKeyValuePairsToJson(keyValuePairs)).Result);
     }
 
     /// <summary>
@@ -179,7 +185,7 @@ public class BusinessFormCalculator
         try
         {
             if (string.IsNullOrEmpty(business.Func)) return;
-        
+
             foreach (JObject root in JArray.Parse(business.Func))
             foreach (KeyValuePair<string, JToken> param in root)
                 funcPool.Add(param.Key, param.Value[BusinessFormStatics.FuncTag].ToString());

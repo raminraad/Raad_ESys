@@ -1,5 +1,5 @@
 using System.Text.Json;
-using ESys.Application.CQRS.JWT.Commands.BusinessForm;
+using ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
 using FastEndpoints;
 using MediatR;
 

@@ -1,5 +1,5 @@
+using ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
 using ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
-using ESys.Application.CQRS.JWT.Commands.BusinessForm;
 
 namespace ESys.Application.Abstractions.Services.JWT;
 

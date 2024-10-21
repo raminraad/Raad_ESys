@@ -8,7 +8,7 @@ namespace ESys.Application.CQRS.BusinessForm.Queries.GetInitialBusinessForm;
 /// </summary>
 /// <param name="businessFormInitiator">initialization provider gotten through dependency injection</param>
 public class GetInitialBusinessFormQueryHandler(BusinessFormInitiator businessFormInitiator)
-    : IRequestHandler<GetInitialBusinessFormQuery, GetInitialBusinessFormResponse>
+    : IRequestHandler<GetInitialBusinessFormQuery, GetInitialBusinessFormQueryResult>
 {
     /// <summary>
     /// Base method of request handling which gets run automatically by mediator
@@ -16,10 +16,10 @@ public class GetInitialBusinessFormQueryHandler(BusinessFormInitiator businessFo
     /// <param name="request">Request gotten from end point containing data needed for initialization service</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Corresponding response containing initialization data</returns>
-    public Task<GetInitialBusinessFormResponse> Handle(GetInitialBusinessFormQuery request,
+    public Task<GetInitialBusinessFormQueryResult> Handle(GetInitialBusinessFormQuery request,
         CancellationToken cancellationToken)
     {
-        var result = new GetInitialBusinessFormResponse()
+        var result = new GetInitialBusinessFormQueryResult()
         {
             Result = businessFormInitiator.GetInitialBusinessForm(request.BusinessId).Result
         };

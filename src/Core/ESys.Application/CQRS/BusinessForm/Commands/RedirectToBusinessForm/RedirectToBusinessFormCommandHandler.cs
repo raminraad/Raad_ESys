@@ -8,7 +8,7 @@ using MediatR;
 namespace ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
 
 public sealed class
-    RedirectToBusinessFormCommandHandler : IRequestHandler<RedirectToBusinessFormCommand, RedirectToBusinessFormResponse>
+    RedirectToBusinessFormCommandHandler : IRequestHandler<RedirectToBusinessFormCommand, RedirectToBusinessFormCommandResult>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ public sealed class
         _systemCacheRepository = systemCacheRepository;
     }
 
-    public Task<RedirectToBusinessFormResponse> Handle(RedirectToBusinessFormCommand command, CancellationToken cancellationToken)
+    public Task<RedirectToBusinessFormCommandResult> Handle(RedirectToBusinessFormCommand command, CancellationToken cancellationToken)
     {
         // todo: check validity via FluentValidation
         var apiIsValid = true;
@@ -35,9 +35,9 @@ public sealed class
         string token = _jwtProvider.GenerateJwtForRedirectToBusinessForm(jwtDto);
         
         var newSession = _systemCacheRepository.AddClientToOpenSessions(_mapper.Map<NewClientSessionDto>(command));
-        var response = new RedirectToBusinessFormResponse
+        var response = new RedirectToBusinessFormCommandResult
         {
-            BackUrl = newSession.Url,
+            Url = newSession.Url,
         };
         return Task.FromResult(response);
     }
