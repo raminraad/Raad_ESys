@@ -5,7 +5,5 @@ namespace ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
 /// </summary>
 public class RedirectToBusinessFormResponse
 {
-    public Guid UniqueId { get; set; }
-    public required string BackUrlBase { get; set; }
-    public required string ClientToken { get; set; }
+    public required string BackUrl { get; set; }
 }

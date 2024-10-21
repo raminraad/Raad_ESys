@@ -1,9 +1,10 @@
 using ESys.Application.Models;
+using ESys.Persistence.Dapper.Repositories;
 
 namespace ESys.Application.Abstractions.Persistence;
 
 public interface ISystemCacheRepository
 {
-    double ValidRedirectionsToBusinessFormCount { get; }
-    Guid AddClientToOpenSessions(OpenClientSessionDto openClientSession);
+    double LastOrder { get; }
+    OpenedClientSessionDto AddClientToOpenSessions(NewClientSessionDto newClientSession);
 }

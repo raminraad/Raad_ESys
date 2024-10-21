@@ -1,3 +1,4 @@
+using ESys.Application.Abstractions.Persistence;
 using ESys.Application.Abstractions.Services.JWT;
 using ESys.Application.SharedKernel;
 using MediatR;
@@ -8,10 +9,12 @@ public class
     GenerateJwtForBusinessFormCommandHandler : IRequestHandler<GenerateJwtForBusinessFormCommand, string>
 {
     private readonly IJwtProvider _jwtProvider;
+    private readonly ISystemCacheRepository _systemCacheRepository;
 
-    public GenerateJwtForBusinessFormCommandHandler(IJwtProvider jwtProvider)
+    public GenerateJwtForBusinessFormCommandHandler(IJwtProvider jwtProvider,ISystemCacheRepository systemCacheRepository)
     {
         _jwtProvider = jwtProvider;
+        _systemCacheRepository = systemCacheRepository;
     }
 
     public Task<string> Handle(GenerateJwtForBusinessFormCommand command, CancellationToken cancellationToken)
@@ -26,6 +29,8 @@ public class
 
         string token = _jwtProvider.GenerateJwtForCalcForm(command);
 
+        
+        
         return Task.FromResult(token);
     }
 

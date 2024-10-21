@@ -33,13 +33,12 @@ public sealed class
 
         var jwtDto = _mapper.Map<RedirectToBusinessFormJwtGenerationDto>(command);
         string token = _jwtProvider.GenerateJwtForRedirectToBusinessForm(jwtDto);
+        
+        var newSession = _systemCacheRepository.AddClientToOpenSessions(_mapper.Map<NewClientSessionDto>(command));
         var response = new RedirectToBusinessFormResponse
         {
-            BackUrlBase = BusinessFormStatics.BusinessFormUrlBase,
-            ClientToken = token
+            BackUrl = newSession.Url,
         };
-        Guid uniqueId = _systemCacheRepository.AddClientToOpenSessions(_mapper.Map<OpenClientSessionDto>(response));
-        response.UniqueId = uniqueId;
         return Task.FromResult(response);
     }
 
