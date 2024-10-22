@@ -1,3 +1,4 @@
+using ESys.API.Statics;
 using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
 using FastEndpoints;
 using MediatR;
@@ -7,7 +8,7 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl
     /// <summary>
     /// Business holder uses this end point to request access token for a specific client session
     /// </summary>
-    public class GenerateBusinessFormUrlEndPoint : Endpoint<GenerateBusinessFormUrlRequest, GenerateBusinessFormUrlCommandResponse>
+    public class GenerateBusinessFormUrlEndPoint : Endpoint<GenerateBusinessFormUrlRequest, string>
     {
         private readonly IMediator _mediator;
         private readonly AutoMapper.IMapper _mapper;
@@ -21,7 +22,7 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl
         public override void Configure()
         {
             Verbs(Http.POST);
-            Routes("/redirecttobusiness");
+            Routes("/business/auth/client");
             AllowAnonymous();
         }
 
@@ -38,7 +39,8 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
-                await SendOkAsync(_mapper.Map<GenerateBusinessFormUrlCommandResponse>(resp),ct);
+                var redirectionUrl = $"{ApiStatics.BusinessFormBaseUrl}/{resp.TempRoute}";
+                await SendOkAsync(redirectionUrl, ct);
             }
             catch (Exception e)
             {

@@ -3,6 +3,7 @@ using System.Numerics;
 using Dapper;
 using ESys.Application.Abstractions.Persistence;
 using ESys.Domain.Entities;
+using ESys.Domain.Exceptions;
 using ESys.Persistence.Static;
 using Microsoft.Extensions.Configuration;
 
@@ -59,25 +60,32 @@ public class ClientSessionCacheRepository : IClientSessionCacheRepository
 
     public async Task<ClientSessionCache> Add(ClientSessionCache entity)
     {
-        using (var connection = new SqlConnection(_connectionString))
+        try
         {
-            await connection.OpenAsync();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
 
-            var newInsertedId = connection.QuerySingle<int>(
-                $"""
-                 INSERT INTO {SqlServerStatics.Tables.TblClientSessionCache.TableName} 
-                     ({SqlServerStatics.Tables.TblClientSessionCache.BusinessId},
-                      {SqlServerStatics.Tables.TblClientSessionCache.ClientToken},
-                      {SqlServerStatics.Tables.TblClientSessionCache.TempRoute})
-                 VALUES 
-                     (@{SqlServerStatics.Tables.TblClientSessionCache.BusinessId},
-                      @{SqlServerStatics.Tables.TblClientSessionCache.ClientToken},
-                      @{SqlServerStatics.Tables.TblClientSessionCache.TempRoute})
-                 SELECT CAST(SCOPE_IDENTITY() AS INT);
-                 """,
-                entity
-            );
-            return entity;
+                var newInsertedId = connection.QuerySingle<int>(
+                    $"""
+                     INSERT INTO {SqlServerStatics.Tables.TblClientSessionCache.TableName} 
+                         ({SqlServerStatics.Tables.TblClientSessionCache.BusinessId},
+                          {SqlServerStatics.Tables.TblClientSessionCache.ClientToken},
+                          {SqlServerStatics.Tables.TblClientSessionCache.TempRoute})
+                     VALUES 
+                         (@{SqlServerStatics.Tables.TblClientSessionCache.BusinessId},
+                          @{SqlServerStatics.Tables.TblClientSessionCache.ClientToken},
+                          @{SqlServerStatics.Tables.TblClientSessionCache.TempRoute})
+                     SELECT CAST(SCOPE_IDENTITY() AS INT);
+                     """,
+                    entity
+                );
+                return entity;
+            }
+        }
+        catch (Exception e)
+        {
+            throw new DbException(e.Message);
         }
     }
 

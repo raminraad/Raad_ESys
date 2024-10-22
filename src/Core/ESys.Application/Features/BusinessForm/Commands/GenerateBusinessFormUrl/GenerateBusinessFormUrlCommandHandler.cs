@@ -22,7 +22,7 @@ public sealed class
         _clientSessionCacheRepository = clientSessionCacheRepository;
     }
 
-    public async Task<GenerateBusinessFormUrlCommandResponse> Handle(GenerateBusinessFormUrlCommand urlCommand,
+    public async Task<GenerateBusinessFormUrlCommandResponse> Handle(GenerateBusinessFormUrlCommand command,
         CancellationToken cancellationToken)
     {
         // todo: check validity via FluentValidation
@@ -34,14 +34,21 @@ public sealed class
         }
 
 
+        var tempRoute = Guid.NewGuid();
         string clientToken =
-            _jwtProvider.GenerateJwtForRedirectToBusinessForm(_mapper.Map<RequestClientJwtDto>(urlCommand));
+            _jwtProvider.GenerateJwtForClient(new RequestClientJwtDto
+            {
+                BusinessId = command.BusinessId,
+                BusinessToken = command.BusinessToken,
+                TempRoute = tempRoute,
+                ExpireDateTime = DateTime.UtcNow.AddMinutes(10)
+            });
 
         ClientSessionCache newSessionCache = new()
         {
-            TempRoute = Guid.NewGuid(),
+            TempRoute = tempRoute,
             ClientToken = clientToken,
-            BusinessId = urlCommand.BusinessId, 
+            BusinessId = command.BusinessId, 
         };
         
         newSessionCache = await  _clientSessionCacheRepository.Add(newSessionCache);

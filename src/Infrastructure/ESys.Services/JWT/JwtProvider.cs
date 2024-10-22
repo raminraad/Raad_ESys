@@ -80,13 +80,13 @@ public sealed class JwtProvider : IJwtProvider
         // return jwt;
     }
 
-    public string GenerateJwtForRedirectToBusinessForm(RequestClientJwtDto req)
+    public string GenerateJwtForClient(RequestClientJwtDto req)
     {
         var claims = new Claim[]
         {
-            new("client-session-id", req.ClientSessionId),
-            new("business-id", req.BusinessId),
-            new("counter", req.Counter??"0")
+            new("bid", req.BusinessId.ToString()),
+            new("tr", req.TempRoute.ToString()),
+            new("bt", req.BusinessToken),
         };
 
         
@@ -104,7 +104,7 @@ public sealed class JwtProvider : IJwtProvider
             _options.Audience,
             claims,
             DateTime.UtcNow, // Not before
-            DateTime.UtcNow.AddHours(1), // Exp time
+            req.ExpireDateTime, // Exp time
             signingCredentials);
         string tokenValue = new JwtSecurityTokenHandler()
             .WriteToken(token);

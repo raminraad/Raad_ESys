@@ -2,7 +2,8 @@ namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUr
 
 public class RequestClientJwtDto
 {
-    public required string BusinessId { get; set; }
-    public required string ClientSessionId { get; set; }
-    public required string Counter { get; set; }
+    public required int BusinessId { get; init; }
+    public required string BusinessToken { get; init; }
+    public required Guid TempRoute { get; init; }
+    public required DateTime ExpireDateTime { get; init; }
 }

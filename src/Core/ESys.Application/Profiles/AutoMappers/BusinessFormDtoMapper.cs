@@ -7,6 +7,5 @@ public class BusinessFormDtoMapper : Profile
 {
     public BusinessFormDtoMapper()
     {
-        CreateMap<GenerateBusinessFormUrlCommand, RequestClientJwtDto>(MemberList.Source);
     }
 }

@@ -20,7 +20,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
         public override void Configure()
         {
             Verbs(Http.POST);
-            Routes("/businessform");
+            Routes("/business/calculate");
             AllowAnonymous();
         }
         
