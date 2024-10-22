@@ -1,10 +1,10 @@
-using ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
-using ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
+using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+using ESys.Application.Features.BusinessForm.Commands.GenerateJwtForBusinessForm;
 
 namespace ESys.Application.Abstractions.Services.JWT;
 
 public interface IJwtProvider
 {
     string GenerateJwtForCalcForm(GenerateJwtForBusinessFormCommand req);
-    string GenerateJwtForRedirectToBusinessForm(RedirectToBusinessFormJwtGenerationDto req);
+    string GenerateJwtForRedirectToBusinessForm(GenerateBusinessFormUrlJwtGenerationDto req);
 }

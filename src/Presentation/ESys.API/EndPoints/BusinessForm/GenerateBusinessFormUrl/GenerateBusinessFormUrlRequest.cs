@@ -1,8 +1,6 @@
-using MediatR;
+namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl;
 
-namespace ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
-
-public record GenerateJwtForBusinessFormCommand() : IRequest<string>
+public record GenerateBusinessFormUrlRequest()
 {
     public required string BusinessId { get; set; }
     public required string BusinessToken { get; set; }

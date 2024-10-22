@@ -2,8 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ESys.Application.Abstractions.Services.JWT;
-using ESys.Application.CQRS.BusinessForm.Commands.GenerateJwtForBusinessForm;
-using ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
+using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+using ESys.Application.Features.BusinessForm.Commands.GenerateJwtForBusinessForm;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -80,7 +80,7 @@ public sealed class JwtProvider : IJwtProvider
         // return jwt;
     }
 
-    public string GenerateJwtForRedirectToBusinessForm(RedirectToBusinessFormJwtGenerationDto req)
+    public string GenerateJwtForRedirectToBusinessForm(GenerateBusinessFormUrlJwtGenerationDto req)
     {
         var claims = new Claim[]
         {

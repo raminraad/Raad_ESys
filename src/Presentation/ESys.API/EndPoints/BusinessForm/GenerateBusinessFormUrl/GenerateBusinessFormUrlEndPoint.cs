@@ -1,19 +1,18 @@
-using ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm;
-using ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
+using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
 using FastEndpoints;
 using MediatR;
 
-namespace ESys.API.EndPoints.BusinessForm.RedirectToBusinessForm
+namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl
 {
     /// <summary>
     /// Business holder uses this end point to request access token for a specific client session
     /// </summary>
-    public class RedirectToBusinessFormEndPoint : Endpoint<RedirectToBusinessFormRequest, RedirectToBusinessFormResponse>
+    public class GenerateBusinessFormUrlEndPoint : Endpoint<GenerateBusinessFormUrlRequest, GenerateBusinessFormUrlCommandResponse>
     {
         private readonly IMediator _mediator;
         private readonly AutoMapper.IMapper _mapper;
 
-        public RedirectToBusinessFormEndPoint(IMediator mediator, AutoMapper.IMapper mapper)
+        public GenerateBusinessFormUrlEndPoint(IMediator mediator, AutoMapper.IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
@@ -31,15 +30,15 @@ namespace ESys.API.EndPoints.BusinessForm.RedirectToBusinessForm
         /// </summary>
         /// <param name="req">Needed information for request validation</param>
         /// <param name="ct">Cancellation token</param>
-        public override async Task HandleAsync(RedirectToBusinessFormRequest req, CancellationToken ct)
+        public override async Task HandleAsync(GenerateBusinessFormUrlRequest req, CancellationToken ct)
         {
             try
             {
-                var mediatorReq = _mapper.Map<RedirectToBusinessFormCommand>(req);
+                var mediatorReq = _mapper.Map<GenerateBusinessFormUrlCommand>(req);
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
-                await SendOkAsync(_mapper.Map<RedirectToBusinessFormResponse>(resp),ct);
+                await SendOkAsync(_mapper.Map<GenerateBusinessFormUrlCommandResponse>(resp),ct);
             }
             catch (Exception e)
             {

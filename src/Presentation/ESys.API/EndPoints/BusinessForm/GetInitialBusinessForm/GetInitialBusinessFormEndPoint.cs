@@ -1,5 +1,5 @@
-using ESys.Application.CQRS.BusinessForm.Queries.GetInitialBusinessForm;
 using ESys.Application.Exceptions;
+using ESys.Application.Features.BusinessForm.Queries.GetInitialBusinessForm;
 using FastEndpoints;
 using MediatR;
 

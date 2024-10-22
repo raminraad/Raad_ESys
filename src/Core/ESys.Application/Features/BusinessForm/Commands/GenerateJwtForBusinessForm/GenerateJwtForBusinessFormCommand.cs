@@ -1,6 +1,8 @@
-namespace ESys.API.EndPoints.BusinessForm.RedirectToBusinessForm;
+using MediatR;
 
-public record RedirectToBusinessFormRequest()
+namespace ESys.Application.Features.BusinessForm.Commands.GenerateJwtForBusinessForm;
+
+public record GenerateJwtForBusinessFormCommand() : IRequest<string>
 {
     public required string BusinessId { get; set; }
     public required string BusinessToken { get; set; }

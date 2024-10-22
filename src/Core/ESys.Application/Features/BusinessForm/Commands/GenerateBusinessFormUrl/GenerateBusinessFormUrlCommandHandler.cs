@@ -2,26 +2,25 @@ using AutoMapper;
 using ESys.Application.Abstractions.Persistence;
 using ESys.Application.Abstractions.Services.JWT;
 using ESys.Application.Models;
-using ESys.Application.Statics;
 using MediatR;
 
-namespace ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
+namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
 
 public sealed class
-    RedirectToBusinessFormCommandHandler : IRequestHandler<RedirectToBusinessFormCommand, RedirectToBusinessFormCommandResult>
+    GenerateBusinessFormUrlCommandHandler : IRequestHandler<GenerateBusinessFormUrlCommand, GenerateBusinessFormUrlCommandResponse>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IMapper _mapper;
     private readonly ISystemCacheRepository _systemCacheRepository;
 
-    public RedirectToBusinessFormCommandHandler(IJwtProvider jwtProvider,IMapper mapper,ISystemCacheRepository systemCacheRepository)
+    public GenerateBusinessFormUrlCommandHandler(IJwtProvider jwtProvider,IMapper mapper,ISystemCacheRepository systemCacheRepository)
     {
         _jwtProvider = jwtProvider;
         _mapper = mapper;
         _systemCacheRepository = systemCacheRepository;
     }
 
-    public Task<RedirectToBusinessFormCommandResult> Handle(RedirectToBusinessFormCommand command, CancellationToken cancellationToken)
+    public Task<GenerateBusinessFormUrlCommandResponse> Handle(GenerateBusinessFormUrlCommand urlCommand, CancellationToken cancellationToken)
     {
         // todo: check validity via FluentValidation
         var apiIsValid = true;
@@ -31,11 +30,11 @@ public sealed class
             throw new Exception();
         }
 
-        var jwtDto = _mapper.Map<RedirectToBusinessFormJwtGenerationDto>(command);
+        var jwtDto = _mapper.Map<GenerateBusinessFormUrlJwtGenerationDto>(urlCommand);
         string token = _jwtProvider.GenerateJwtForRedirectToBusinessForm(jwtDto);
         
-        var newSession = _systemCacheRepository.AddClientToOpenSessions(_mapper.Map<NewClientSessionDto>(command));
-        var response = new RedirectToBusinessFormCommandResult
+        var newSession = _systemCacheRepository.AddClientToOpenSessions(_mapper.Map<NewClientSessionDto>(urlCommand));
+        var response = new GenerateBusinessFormUrlCommandResponse
         {
             Url = newSession.Url,
         };

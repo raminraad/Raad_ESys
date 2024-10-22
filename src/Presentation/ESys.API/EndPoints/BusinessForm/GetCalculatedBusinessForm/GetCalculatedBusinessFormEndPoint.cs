@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using ESys.Application.CQRS.BusinessForm.Queries.GetCalculatedBusinessForm;
+using ESys.Application.Features.BusinessForm.Queries.GetCalculatedBusinessForm;
 using FastEndpoints;
 using MediatR;
 
@@ -9,7 +9,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
     /// <summary>
     /// End point for getting data needed for initializing Business form
     /// </summary>
-    public class GetCalculatedBusinessFormEndPoint : Endpoint<List<JsonObject>,GetCalculatedBusinessFormQueryResult>
+    public class GetCalculatedBusinessFormEndPoint : Endpoint<List<JsonObject>,GetCalculatedBusinessFormQueryResponse>
     {
         private readonly IMediator _mediator;
 

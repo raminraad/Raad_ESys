@@ -1,8 +1,9 @@
 using MediatR;
 
-namespace ESys.Application.CQRS.BusinessForm.Commands.RedirectToBusinessForm;
+namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
 
-public record RedirectToBusinessFormCommand() : IRequest<RedirectToBusinessFormCommandResult>
+public record 
+    GenerateBusinessFormUrlCommand() : IRequest<GenerateBusinessFormUrlCommandResponse>
 {
     public required string BusinessId { get; set; }
     public required string BusinessToken { get; set; }

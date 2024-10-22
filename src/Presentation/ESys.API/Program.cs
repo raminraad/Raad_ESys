@@ -57,7 +57,7 @@ builder.Services.AddEPaaSPersistence(configuration);
 
 #region AutoMapper
 
-builder.Services.AddAutoMapper(typeof(GenerateJwtForBusinessFormMapper));
+builder.Services.AddAutoMapper(typeof(GenerateBusinessFormUrlMapper));
 
 #endregion
 
