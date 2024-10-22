@@ -1,5 +1,5 @@
 using ESys.Application.Abstractions.Services.FileUpload;
-using ESys.Application.Exceptions;
+using ESys.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
@@ -21,7 +21,7 @@ public class FileUploadService : IFileUploadService
         _fileUploadConfigDto = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>();
     }
 
-    private bool IsFileValid(IFormFile file)
+    private bool CheckConstraints(IFormFile file)
     {
         //Checking the file for extension validation
         var fileExtension = Path.GetExtension(file.FileName);
@@ -42,9 +42,9 @@ public class FileUploadService : IFileUploadService
         return true;
     }
 
-    public string Upload(IFormFile file)
+    public string Receive(IFormFile file)
     {
-        if (!IsFileValid(file))
+        if (!CheckConstraints(file))
             return "File(s) not valid.";
 
         //name changing
@@ -63,9 +63,9 @@ public class FileUploadService : IFileUploadService
         return fileNewName + fileExtension;
     }
 
-    public IEnumerable<string> Upload(IEnumerable<IFormFile> files)
+    public IEnumerable<string> Receive(IEnumerable<IFormFile> files)
     {
         foreach (var file in files)
-            yield return Upload(file);
+            yield return Receive(file);
     }
 }

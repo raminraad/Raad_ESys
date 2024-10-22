@@ -43,7 +43,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
                 //     contentType: "image/png");
                 //
                 // return;
-                var fileName = _fileUploadService.Upload(file);
+                var fileName = _fileUploadService.Receive(file);
             await SendOkAsync(new BusinessFormFileUploadResponse {Dxsfile = fileName},ct);
             }
         }

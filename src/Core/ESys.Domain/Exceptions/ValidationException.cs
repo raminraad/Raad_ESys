@@ -1,6 +1,6 @@
-﻿using FluentValidation.Results;
+﻿using ValidationResult = FluentValidation.Results.ValidationResult;
 
-namespace ESys.Application.Exceptions;
+namespace ESys.Domain.Exceptions;
 
 /// <summary>
 /// Occurs when data provided by client have validation issues. Pipeline returns BadRequest with status code 400

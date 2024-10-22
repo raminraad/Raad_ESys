@@ -1,4 +1,5 @@
 using ESys.API.Attributes;
+using ESys.Application.Abstractions.Persistence;
 using ESys.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,22 +7,22 @@ namespace ESys.MVC.Controllers;
 
 public class BusinessFormController : Controller
 {
-    [Route("businessform/{clientSession}")]
-    public IActionResult Business([FromRoute]string clientSession)
+    private readonly IClientSessionCacheRepository _clientSessionCacheRepository;
+
+    public BusinessFormController(IClientSessionCacheRepository clientSessionCacheRepository)
     {
-        var opensessions = JsonHandler.SimpleRead<List<ClientSession>>("D:\\f.j");
+        _clientSessionCacheRepository = clientSessionCacheRepository;
+    }
+    
+    [Route("epaas/businessform/client/{clientSession}")]
+    public IActionResult Business([FromRoute]Guid clientSession)
+    {
         try
         {
-            var clientSessionAsGuid = Guid.Parse(clientSession);
-            if (opensessions.Select(o=>o.SessionId).Contains(clientSessionAsGuid))
-            {
-                ViewBag.SessionId = clientSession;
+            if (_clientSessionCacheRepository.GetByTempRoute(clientSession) != null)
                 return View();
-            }
             else
-            {
                 return NotFound();
-            }
         }
         catch (Exception e)
         {

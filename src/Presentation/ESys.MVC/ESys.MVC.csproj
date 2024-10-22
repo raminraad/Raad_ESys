@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Views\BusinessForm\Index.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Core\ESys.Application\ESys.Application.csproj" />
       <ProjectReference Include="..\..\Infrastructure\ESys.Services\ESys.Services.csproj" />
       <ProjectReference Include="..\..\Infrastructure\ESys.Persistence\ESys.Persistence.csproj" />

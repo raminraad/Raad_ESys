@@ -80,7 +80,7 @@ public sealed class JwtProvider : IJwtProvider
         // return jwt;
     }
 
-    public string GenerateJwtForRedirectToBusinessForm(GenerateBusinessFormUrlJwtGenerationDto req)
+    public string GenerateJwtForRedirectToBusinessForm(RequestClientJwtDto req)
     {
         var claims = new Claim[]
         {

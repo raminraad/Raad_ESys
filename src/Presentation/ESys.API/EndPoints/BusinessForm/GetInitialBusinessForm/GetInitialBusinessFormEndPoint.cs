@@ -1,5 +1,5 @@
-using ESys.Application.Exceptions;
 using ESys.Application.Features.BusinessForm.Queries.GetInitialBusinessForm;
+using ESys.Domain.Exceptions;
 using FastEndpoints;
 using MediatR;
 

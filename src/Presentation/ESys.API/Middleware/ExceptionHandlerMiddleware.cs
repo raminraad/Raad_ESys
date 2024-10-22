@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
-using ESys.Application.Exceptions;
+using ESys.Domain.Exceptions;
 
 namespace ESys.API.Middleware;
 

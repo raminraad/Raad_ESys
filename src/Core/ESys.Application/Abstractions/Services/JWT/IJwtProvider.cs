@@ -6,5 +6,5 @@ namespace ESys.Application.Abstractions.Services.JWT;
 public interface IJwtProvider
 {
     string GenerateJwtForCalcForm(GenerateJwtForBusinessFormCommand req);
-    string GenerateJwtForRedirectToBusinessForm(GenerateBusinessFormUrlJwtGenerationDto req);
+    string GenerateJwtForRedirectToBusinessForm(RequestClientJwtDto req);
 }

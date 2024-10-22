@@ -9,12 +9,12 @@ public class
     GenerateJwtForBusinessFormCommandHandler : IRequestHandler<GenerateJwtForBusinessFormCommand, string>
 {
     private readonly IJwtProvider _jwtProvider;
-    private readonly ISystemCacheRepository _systemCacheRepository;
+    private readonly IClientSessionCacheRepository _clientSessionCacheRepository;
 
-    public GenerateJwtForBusinessFormCommandHandler(IJwtProvider jwtProvider,ISystemCacheRepository systemCacheRepository)
+    public GenerateJwtForBusinessFormCommandHandler(IJwtProvider jwtProvider,IClientSessionCacheRepository clientSessionCacheRepository)
     {
         _jwtProvider = jwtProvider;
-        _systemCacheRepository = systemCacheRepository;
+        _clientSessionCacheRepository = clientSessionCacheRepository;
     }
 
     public Task<string> Handle(GenerateJwtForBusinessFormCommand command, CancellationToken cancellationToken)

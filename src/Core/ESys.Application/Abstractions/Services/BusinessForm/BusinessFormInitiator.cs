@@ -1,6 +1,6 @@
 using ESys.Application.Abstractions.Persistence;
-using ESys.Application.Exceptions;
 using ESys.Domain.Entities;
+using ESys.Domain.Exceptions;
 
 namespace ESys.Application.Abstractions.Services.BusinessForm;
 
@@ -19,11 +19,11 @@ public class BusinessFormInitiator
     /// <param name="BusinessId">Business Id which corresponding UI must be returned</param>
     /// <returns>A Json string containing all the data needed for Business Form initialization</returns>
     /// <exception cref="NotFoundException">Occurs when there is no UI for received Business Id in database</exception>
-    public async Task<string> GetInitialBusinessForm(string BusinessId)
+    public async Task<string> GetInitialBusinessForm(int BusinessId)
     {
-            var initialBusinessUI = await _businessInitialUiRepository.GetByIdAsync(BusinessId);
+            var initialBusinessUI = await _businessInitialUiRepository.GetById(BusinessId);
             if (initialBusinessUI is null)
                 throw new NotFoundException(nameof(BusinessInitialUI), BusinessId);
-            return initialBusinessUI.UiJson;
+            return initialBusinessUI.UiContent;
     }
 }

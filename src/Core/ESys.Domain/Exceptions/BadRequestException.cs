@@ -1,4 +1,4 @@
-﻿namespace ESys.Application.Exceptions;
+﻿namespace ESys.Domain.Exceptions;
 
 /// <summary>
 /// Occurs when data received from client are not valid. Pipeline returns BadRequest with status code 400

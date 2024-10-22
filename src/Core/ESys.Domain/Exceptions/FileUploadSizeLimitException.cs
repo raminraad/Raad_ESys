@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace ESys.Application.Exceptions;
+namespace ESys.Domain.Exceptions;
 
 /// <summary>
 /// Occurs when file being uploaded by client exceeds size limit

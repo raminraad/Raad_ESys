@@ -1,4 +1,4 @@
-﻿namespace ESys.Application.Exceptions;
+﻿namespace ESys.Domain.Exceptions;
 
 /// <summary>
 /// Occurs when data with provided key is not found in database. Pipeline returns NotFound with status code 404

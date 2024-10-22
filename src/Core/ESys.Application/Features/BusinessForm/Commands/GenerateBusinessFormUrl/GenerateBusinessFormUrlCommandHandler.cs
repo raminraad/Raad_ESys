@@ -1,26 +1,29 @@
 using AutoMapper;
 using ESys.Application.Abstractions.Persistence;
 using ESys.Application.Abstractions.Services.JWT;
-using ESys.Application.Models;
+using ESys.Domain.Entities;
 using MediatR;
 
 namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
 
 public sealed class
-    GenerateBusinessFormUrlCommandHandler : IRequestHandler<GenerateBusinessFormUrlCommand, GenerateBusinessFormUrlCommandResponse>
+    GenerateBusinessFormUrlCommandHandler : IRequestHandler<GenerateBusinessFormUrlCommand,
+    GenerateBusinessFormUrlCommandResponse>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IMapper _mapper;
-    private readonly ISystemCacheRepository _systemCacheRepository;
+    private readonly IClientSessionCacheRepository _clientSessionCacheRepository;
 
-    public GenerateBusinessFormUrlCommandHandler(IJwtProvider jwtProvider,IMapper mapper,ISystemCacheRepository systemCacheRepository)
+    public GenerateBusinessFormUrlCommandHandler(IJwtProvider jwtProvider, IMapper mapper,
+        IClientSessionCacheRepository clientSessionCacheRepository)
     {
         _jwtProvider = jwtProvider;
         _mapper = mapper;
-        _systemCacheRepository = systemCacheRepository;
+        _clientSessionCacheRepository = clientSessionCacheRepository;
     }
 
-    public Task<GenerateBusinessFormUrlCommandResponse> Handle(GenerateBusinessFormUrlCommand urlCommand, CancellationToken cancellationToken)
+    public async Task<GenerateBusinessFormUrlCommandResponse> Handle(GenerateBusinessFormUrlCommand urlCommand,
+        CancellationToken cancellationToken)
     {
         // todo: check validity via FluentValidation
         var apiIsValid = true;
@@ -30,15 +33,22 @@ public sealed class
             throw new Exception();
         }
 
-        var jwtDto = _mapper.Map<GenerateBusinessFormUrlJwtGenerationDto>(urlCommand);
-        string token = _jwtProvider.GenerateJwtForRedirectToBusinessForm(jwtDto);
+
+        string clientToken =
+            _jwtProvider.GenerateJwtForRedirectToBusinessForm(_mapper.Map<RequestClientJwtDto>(urlCommand));
+
+        ClientSessionCache newSessionCache = new()
+        {
+            TempRoute = Guid.NewGuid(),
+            ClientToken = clientToken,
+            BusinessId = urlCommand.BusinessId, 
+        };
         
-        var newSession = _systemCacheRepository.AddClientToOpenSessions(_mapper.Map<NewClientSessionDto>(urlCommand));
+        newSessionCache = await  _clientSessionCacheRepository.Add(newSessionCache);
         var response = new GenerateBusinessFormUrlCommandResponse
         {
-            Url = newSession.Url,
+            TempRoute = newSessionCache.TempRoute.ToString()
         };
-        return Task.FromResult(response);
+        return response;
     }
-
 }

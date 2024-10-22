@@ -5,5 +5,5 @@ namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUr
 /// </summary>
 public class GenerateBusinessFormUrlCommandResponse
 {
-    public required string Url { get; set; }
+    public required string TempRoute { get; set; }
 }

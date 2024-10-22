@@ -2,9 +2,9 @@ using System.Numerics;
 using ESys.Application.Abstractions.Persistence;
 using ESys.Application.Abstractions.Services.BusinessFormCalculation;
 using ESys.Application.Abstractions.Services.JSON;
-using ESys.Application.Exceptions;
 using ESys.Application.Statics;
 using ESys.Domain.Entities;
+using ESys.Domain.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using Expression = org.matheval.Expression;
@@ -52,8 +52,8 @@ public class BusinessFormCalculator
 
         FillJsonInDataPool(requestBody);
 
-        var business = await _businessRepository.GetByIdAsync(BigInteger.Parse(dataPool["bizid"]));
-        if (business?.BizId is not null)
+        var business = await _businessRepository.GetById(int.Parse(dataPool["bizid"]));
+        if (business?.BusinessId is not null)
             _business = business;
         else
             throw new KeyNotFoundException("Business does not exist.");

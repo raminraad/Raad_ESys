@@ -26,7 +26,7 @@ public class UploadController : ControllerBase
         try
         {
             _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
-            return Ok(new{dxsfile=_fileUploadService.Upload(file)});
+            return Ok(new{dxsfile=_fileUploadService.Receive(file)});
         }
         catch (Exception e)
         {
@@ -41,7 +41,7 @@ public class UploadController : ControllerBase
         try
         {
             _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"Business\\{businessId}\\{orderId}";
-            return Ok(_fileUploadService.Upload(files));
+            return Ok(_fileUploadService.Receive(files));
         }
         catch (Exception e)
         {

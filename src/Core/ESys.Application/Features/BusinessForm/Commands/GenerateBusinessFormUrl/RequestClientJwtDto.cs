@@ -1,6 +1,6 @@
 namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
 
-public class GenerateBusinessFormUrlJwtGenerationDto
+public class RequestClientJwtDto
 {
     public required string BusinessId { get; set; }
     public required string ClientSessionId { get; set; }
