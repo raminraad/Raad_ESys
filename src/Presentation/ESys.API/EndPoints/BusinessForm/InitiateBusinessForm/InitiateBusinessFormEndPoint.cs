@@ -1,18 +1,18 @@
-using ESys.Application.Features.BusinessForm.Queries.GetInitialBusinessForm;
+using ESys.Application.Features.BusinessForm.Queries.InitiateBusinessForm;
 using ESys.Domain.Exceptions;
 using FastEndpoints;
 using MediatR;
 
-namespace ESys.API.EndPoints.BusinessForm.GetInitialBusinessForm
+namespace ESys.API.EndPoints.BusinessForm.InitiateBusinessForm
 {
     /// <summary>
     /// End point for getting data needed for Business From initialization
     /// </summary>
-    public class GetInitialBusinessFormEndPoint : Endpoint<GetInitialBusinessFormQuery, string>
+    public class InitiateBusinessFormEndPoint : Endpoint<InitiateBusinessFormQuery, string>
     {
         private readonly IMediator _mediator;
 
-        public GetInitialBusinessFormEndPoint(IMediator mediator)
+        public InitiateBusinessFormEndPoint(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -28,13 +28,13 @@ namespace ESys.API.EndPoints.BusinessForm.GetInitialBusinessForm
         /// </summary>
         /// <param name="req">Request containing Business Id needed for Business Form initialization</param>
         /// <param name="ct">Cancellation token</param>
-        public override async Task HandleAsync(GetInitialBusinessFormQuery req, CancellationToken ct)
+        public override async Task HandleAsync(InitiateBusinessFormQuery req, CancellationToken ct)
         {
             try
             {
                 var resp = await _mediator.Send(req,ct);
 
-                await SendStringAsync(resp.Result, cancellation: ct);
+                await SendStringAsync(resp, cancellation: ct);
             }
             catch (NotFoundException e)
             { 

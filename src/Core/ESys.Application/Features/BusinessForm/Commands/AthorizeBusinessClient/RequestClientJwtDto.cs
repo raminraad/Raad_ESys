@@ -1,4 +1,4 @@
-namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+namespace ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient;
 
 public class RequestClientJwtDto
 {

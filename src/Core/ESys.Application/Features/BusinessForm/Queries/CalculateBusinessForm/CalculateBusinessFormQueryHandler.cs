@@ -1,14 +1,14 @@
 using ESys.Application.Abstractions.Services.BusinessForm;
 using MediatR;
 
-namespace ESys.Application.Features.BusinessForm.Queries.GetCalculatedBusinessForm;
+namespace ESys.Application.Features.BusinessForm.Queries.CalculateBusinessForm;
 
 /// <summary>
 /// Request handler for BusinessForm calculation. This class is used by mediator
 /// </summary>
 /// <param name="businessFormCalculator">Calculation provider gotten through dependency injection</param>
-public class GetCalculatedBusinessFormQueryHandler(BusinessFormCalculator businessFormCalculator)
-    : IRequestHandler<GetCalculatedBusinessFormQuery, GetCalculatedBusinessFormQueryResponse>
+public class CalculateBusinessFormQueryHandler(BusinessFormCalculator businessFormCalculator)
+    : IRequestHandler<CalculateBusinessFormQuery, string>
 {
     /// <summary>
     /// Base method of request handling which gets run automatically by mediator
@@ -16,14 +16,10 @@ public class GetCalculatedBusinessFormQueryHandler(BusinessFormCalculator busine
     /// <param name="request">Request gotten from end point containing data needed for calculation service</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Corresponding response containing calculation data</returns>
-    public Task<GetCalculatedBusinessFormQueryResponse> Handle(GetCalculatedBusinessFormQuery request,
+    public Task<string> Handle(CalculateBusinessFormQuery request,
         CancellationToken cancellationToken)
     {
-        var result = new GetCalculatedBusinessFormQueryResponse()
-        {
-            Result = businessFormCalculator.GetCalculatedBusinessForm(request.Body).Result
-        };
-        return Task.FromResult(result);
+        return Task.FromResult(businessFormCalculator.GetCalculatedBusinessForm(request.Body).Result);
     }
 
 }

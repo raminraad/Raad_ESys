@@ -1,6 +1,6 @@
-namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload;
+namespace ESys.API.EndPoints.BusinessForm.UploadBusinessFormFile;
 
-public class BusinessFormFileUploadRequest
+public class UploadBusinessFormFileRequest
 {
     // fix parameters
     public string BusinessId { get; set; } = string.Empty;

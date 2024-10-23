@@ -1,4 +1,4 @@
-using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+using ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient;
 using ESys.Application.Features.BusinessForm.Commands.GenerateJwtForBusinessForm;
 
 namespace ESys.Application.Abstractions.Services.JWT;

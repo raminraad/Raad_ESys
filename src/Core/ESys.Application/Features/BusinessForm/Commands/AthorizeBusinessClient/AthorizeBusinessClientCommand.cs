@@ -1,9 +1,9 @@
 using MediatR;
 
-namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+namespace ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient;
 
 public record 
-    GenerateBusinessFormUrlCommand() : IRequest<GenerateBusinessFormUrlCommandResponse>
+    AthorizeBusinessClientCommand() : IRequest<AthorizeBusinessClientResponse>
 {
     public required int BusinessId { get; set; }
     public required string BusinessToken { get; set; }

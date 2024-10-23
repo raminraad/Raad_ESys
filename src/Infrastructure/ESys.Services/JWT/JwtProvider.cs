@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ESys.Application.Abstractions.Services.JWT;
-using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+using ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient;
 using ESys.Application.Features.BusinessForm.Commands.GenerateJwtForBusinessForm;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

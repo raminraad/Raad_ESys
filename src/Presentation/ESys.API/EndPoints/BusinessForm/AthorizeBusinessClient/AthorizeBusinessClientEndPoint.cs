@@ -1,19 +1,20 @@
 using ESys.API.Statics;
-using ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+using ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient;
 using FastEndpoints;
 using MediatR;
 
-namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl
+namespace ESys.API.EndPoints.BusinessForm.AthorizeBusinessClient
 {
     /// <summary>
     /// Business holder uses this end point to request access token for a specific client session
+    /// A temporary Url to business form will be returned in case on successful authorization
     /// </summary>
-    public class GenerateBusinessFormUrlEndPoint : Endpoint<GenerateBusinessFormUrlRequest, string>
+    public class AthorizeBusinessClientEndPoint : Endpoint<AthorizeBusinessClientRequest, string>
     {
         private readonly IMediator _mediator;
         private readonly AutoMapper.IMapper _mapper;
 
-        public GenerateBusinessFormUrlEndPoint(IMediator mediator, AutoMapper.IMapper mapper)
+        public AthorizeBusinessClientEndPoint(IMediator mediator, AutoMapper.IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
@@ -31,11 +32,11 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateBusinessFormUrl
         /// </summary>
         /// <param name="req">Needed information for request validation</param>
         /// <param name="ct">Cancellation token</param>
-        public override async Task HandleAsync(GenerateBusinessFormUrlRequest req, CancellationToken ct)
+        public override async Task HandleAsync(AthorizeBusinessClientRequest req, CancellationToken ct)
         {
             try
             {
-                var mediatorReq = _mapper.Map<GenerateBusinessFormUrlCommand>(req);
+                var mediatorReq = _mapper.Map<AthorizeBusinessClientCommand>(req);
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 

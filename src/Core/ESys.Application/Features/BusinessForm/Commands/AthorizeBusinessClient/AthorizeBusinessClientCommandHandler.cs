@@ -4,17 +4,17 @@ using ESys.Application.Abstractions.Services.JWT;
 using ESys.Domain.Entities;
 using MediatR;
 
-namespace ESys.Application.Features.BusinessForm.Commands.GenerateBusinessFormUrl;
+namespace ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient;
 
 public sealed class
-    GenerateBusinessFormUrlCommandHandler : IRequestHandler<GenerateBusinessFormUrlCommand,
-    GenerateBusinessFormUrlCommandResponse>
+    AthorizeBusinessClientCommandHandler : IRequestHandler<AthorizeBusinessClientCommand,
+    AthorizeBusinessClientResponse>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IMapper _mapper;
     private readonly IClientSessionCacheRepository _clientSessionCacheRepository;
 
-    public GenerateBusinessFormUrlCommandHandler(IJwtProvider jwtProvider, IMapper mapper,
+    public AthorizeBusinessClientCommandHandler(IJwtProvider jwtProvider, IMapper mapper,
         IClientSessionCacheRepository clientSessionCacheRepository)
     {
         _jwtProvider = jwtProvider;
@@ -22,7 +22,7 @@ public sealed class
         _clientSessionCacheRepository = clientSessionCacheRepository;
     }
 
-    public async Task<GenerateBusinessFormUrlCommandResponse> Handle(GenerateBusinessFormUrlCommand command,
+    public async Task<AthorizeBusinessClientResponse> Handle(AthorizeBusinessClientCommand command,
         CancellationToken cancellationToken)
     {
         // todo: check validity via FluentValidation
@@ -52,7 +52,7 @@ public sealed class
         };
         
         newSessionCache = await  _clientSessionCacheRepository.Add(newSessionCache);
-        var response = new GenerateBusinessFormUrlCommandResponse
+        var response = new AthorizeBusinessClientResponse
         {
             TempRoute = newSessionCache.TempRoute.ToString()
         };

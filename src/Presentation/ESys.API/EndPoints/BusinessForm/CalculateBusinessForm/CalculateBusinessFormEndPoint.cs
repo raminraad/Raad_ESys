@@ -1,22 +1,19 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using ESys.Application.Features.BusinessForm.Queries.GetCalculatedBusinessForm;
+using ESys.Application.Features.BusinessForm.Queries.CalculateBusinessForm;
 using FastEndpoints;
 using MediatR;
 
-namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
+namespace ESys.API.EndPoints.BusinessForm.CalculateBusinessForm
 {
     /// <summary>
     /// End point for getting data needed for initializing Business form
     /// </summary>
-    public class GetCalculatedBusinessFormEndPoint : Endpoint<List<JsonObject>,GetCalculatedBusinessFormQueryResponse>
+    public class CalculateBusinessFormEndPoint : Endpoint<List<JsonObject>,string>
     {
-        
-
-        
         private readonly IMediator _mediator;
 
-        public GetCalculatedBusinessFormEndPoint(IMediator mediator)
+        public CalculateBusinessFormEndPoint(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -44,7 +41,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
                 
                 string serializeObject = JsonSerializer.Serialize(req);
 
-                var mediatorReq = new GetCalculatedBusinessFormQuery { Body = serializeObject };
+                var mediatorReq = new CalculateBusinessFormQuery { Body = serializeObject };
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
