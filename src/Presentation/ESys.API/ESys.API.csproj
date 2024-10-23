@@ -36,6 +36,7 @@
     <_ContentIncludedByDefault Remove="TempForRevision\InitialResponseTemplate.json" />
     <_ContentIncludedByDefault Remove="TempForRevision\RequestTemplate.json" />
     <_ContentIncludedByDefault Remove="TempForRevision\ResponseTemplate.json" />
+    <_ContentIncludedByDefault Remove="ClientUploads\Biz\127\.angular-config.json" />
   </ItemGroup>
 
 </Project>

@@ -7,12 +7,12 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
     /// <summary>
     /// End point for uploading files needed for initializing Business form
     /// </summary>
-    public class BusinessFormFileUploadSingleEndPoint : Endpoint<BusinessFormFileUploadRequest,BusinessFormFileUploadResponse>
+    public class BusinessFormFileUploadEndPoint : Endpoint<BusinessFormFileUploadRequest,BusinessFormFileUploadResponse>
     {
         private readonly IFileUploadService _fileUploadService;
         private readonly FileUploadConfigDto _fileUploadConfigDto;
 
-        public BusinessFormFileUploadSingleEndPoint(IFileUploadService fileUploadService,IConfiguration configuration)
+        public BusinessFormFileUploadEndPoint(IFileUploadService fileUploadService,IConfiguration configuration)
         {
             _fileUploadService = fileUploadService;
             var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>() ;
@@ -30,7 +30,7 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
 
         public override async Task HandleAsync(BusinessFormFileUploadRequest req, CancellationToken ct)
         {
-                _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"Biz\\{req.BusinessId}\\{req.OrderId}";
+                _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"{req.BusinessId}\\{req.TempRoute}";
             
             if (Files.Count > 0)
             {
