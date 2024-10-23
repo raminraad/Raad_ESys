@@ -7,31 +7,33 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
     /// <summary>
     /// End point for uploading files needed for initializing Business form
     /// </summary>
-    public class BusinessFormFileUploadEndPoint : Endpoint<BusinessFormFileUploadRequest,BusinessFormFileUploadResponse>
+    public class
+        BusinessFormFileUploadEndPoint : Endpoint<BusinessFormFileUploadRequest, BusinessFormFileUploadResponse>
     {
         private readonly IFileUploadService _fileUploadService;
         private readonly FileUploadConfigDto _fileUploadConfigDto;
 
-        public BusinessFormFileUploadEndPoint(IFileUploadService fileUploadService,IConfiguration configuration)
+        public BusinessFormFileUploadEndPoint(IFileUploadService fileUploadService, IConfiguration configuration)
         {
             _fileUploadService = fileUploadService;
-            var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>() ;
+            var uploadHandlerConfig = configuration.GetSection("UploadHandlerConfig").Get<FileUploadConfigDto>();
             _fileUploadConfigDto = uploadHandlerConfig ?? new();
         }
 
-        
+
         public override void Configure()
         {
             Post("/upload/businessform/single");
             // Policies("user");
             AllowFileUploads();
-            AllowAnonymous();
+            // AllowAnonymous();
+            Roles("client");
         }
 
         public override async Task HandleAsync(BusinessFormFileUploadRequest req, CancellationToken ct)
         {
-                _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"{req.BusinessId}\\{req.TempRoute}";
-            
+            _fileUploadService.FileUploadConfigDto.UploadChildDirectory = $"{req.BusinessId}\\{req.TempRoute}";
+
             if (Files.Count > 0)
             {
                 var file = Files[0];
@@ -44,10 +46,8 @@ namespace ESys.API.EndPoints.BusinessForm.BusinessFormFileUpload
                 //
                 // return;
                 var fileName = _fileUploadService.Receive(file);
-            await SendOkAsync(new BusinessFormFileUploadResponse {Dxsfile = fileName},ct);
+                await SendOkAsync(new BusinessFormFileUploadResponse { Dxsfile = fileName }, ct);
             }
         }
-
-
     }
 }

@@ -20,13 +20,15 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
         {
             _mediator = mediator;
         }
+
         public override void Configure()
         {
             Verbs(Http.POST);
             Routes("/business/calculate");
-            AllowAnonymous();
+            // AllowAnonymous();
+            Roles("client");
         }
-        
+
         /// <summary>
         /// Handles Business Form reevaluation via mediator
         /// </summary>
