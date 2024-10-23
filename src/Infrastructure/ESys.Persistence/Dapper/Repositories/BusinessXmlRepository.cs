@@ -94,7 +94,7 @@ public class BusinessXmlRepository : IBusinessXmlRepository
         throw new NotImplementedException();
     }
 
-    public Task Delete(BusinessXml entity)
+    public Task<int> Delete(BusinessXml entity)
     {
         throw new NotImplementedException();
     }

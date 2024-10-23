@@ -8,7 +8,7 @@ namespace ESys.Application.Features.BusinessForm.Commands.AthorizeBusinessClient
 
 public sealed class
     AthorizeBusinessClientCommandHandler : IRequestHandler<AthorizeBusinessClientCommand,
-    AthorizeBusinessClientResponse>
+    string>
 {
     private readonly IJwtProvider _jwtProvider;
     private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ public sealed class
         _clientSessionCacheRepository = clientSessionCacheRepository;
     }
 
-    public async Task<AthorizeBusinessClientResponse> Handle(AthorizeBusinessClientCommand command,
+    public async Task<string> Handle(AthorizeBusinessClientCommand command,
         CancellationToken cancellationToken)
     {
         // todo: check validity via FluentValidation
@@ -49,13 +49,10 @@ public sealed class
             TempRoute = tempRoute,
             ClientToken = clientToken,
             BusinessId = command.BusinessId, 
+            
         };
         
         newSessionCache = await  _clientSessionCacheRepository.Add(newSessionCache);
-        var response = new AthorizeBusinessClientResponse
-        {
-            TempRoute = newSessionCache.TempRoute.ToString()
-        };
-        return response;
+        return newSessionCache.TempRoute.ToString();
     }
 }

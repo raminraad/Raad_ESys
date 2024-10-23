@@ -9,7 +9,7 @@ namespace ESys.API.EndPoints.BusinessForm.AthorizeBusinessClient
     /// Business holder uses this end point to request access token for a specific client session
     /// A temporary Url to business form will be returned in case on successful authorization
     /// </summary>
-    public class AthorizeBusinessClientEndPoint : Endpoint<AthorizeBusinessClientRequest, string>
+    public class AthorizeBusinessClientEndPoint : Endpoint<AthorizeBusinessClientCommand, string>
     {
         private readonly IMediator _mediator;
         private readonly AutoMapper.IMapper _mapper;
@@ -32,7 +32,7 @@ namespace ESys.API.EndPoints.BusinessForm.AthorizeBusinessClient
         /// </summary>
         /// <param name="req">Needed information for request validation</param>
         /// <param name="ct">Cancellation token</param>
-        public override async Task HandleAsync(AthorizeBusinessClientRequest req, CancellationToken ct)
+        public override async Task HandleAsync(AthorizeBusinessClientCommand req, CancellationToken ct)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace ESys.API.EndPoints.BusinessForm.AthorizeBusinessClient
 
                 var resp = await _mediator.Send(mediatorReq, ct);
 
-                var redirectionUrl = $"{ApiStatics.BusinessFormBaseUrl}/{resp.TempRoute}";
+                var redirectionUrl = $"{ApiStatics.BusinessFormBaseUrl}/{resp}";
                 await SendOkAsync(redirectionUrl, ct);
             }
             catch (Exception e)

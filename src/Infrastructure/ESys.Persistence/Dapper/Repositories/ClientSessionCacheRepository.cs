@@ -94,8 +94,17 @@ public class ClientSessionCacheRepository : IClientSessionCacheRepository
         throw new NotImplementedException();
     }
 
-    public Task Delete(ClientSessionCache entity)
+    public async Task<int> Delete(ClientSessionCache entity)
     {
-        throw new NotImplementedException();
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string queryStatement = $"""
+                                     DELETE  FROM 
+                                     {SqlServerStatics.Tables.TblClientSessionCache.TableName} 
+                                                     WHERE 
+                                                     {SqlServerStatics.Tables.TblClientSessionCache.ClientSessionCacheId}={entity.ClientSessionCacheId}
+                                     """;
+            return await connection.ExecuteAsync(queryStatement);
+        }
     }
 }

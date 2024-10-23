@@ -7,5 +7,6 @@ public class ClientSessionHistory
     public Guid TempRoute { init; get; }
     public required string ClientToken { get; set; }
     public Business? Business { get; set; } = default;
-
+    public string? SubmissionInput { get; set; }
+    public string? SubmissionOutput { get; set; }
 }

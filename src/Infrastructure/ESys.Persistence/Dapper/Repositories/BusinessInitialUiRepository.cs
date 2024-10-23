@@ -26,7 +26,7 @@ public class BusinessInitialUiRepository : IBusinessInitialUiRepository
         throw new NotImplementedException();
     }
 
-    public async Task Delete(BusinessInitialUI entity)
+    public async Task<int> Delete(BusinessInitialUI entity)
     {
         throw new NotImplementedException();
     }

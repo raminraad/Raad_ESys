@@ -59,6 +59,8 @@ public static class TblBusinessXml
             public static string BusinessId => "BusinessId";
             public static string TempRoute => "TempRoute";
             public static string ClientToken => "ClientToken";
+            public static string SubmissionInput => "SubmissionInput";
+            public static string SubmissionOutput => "SubmissionOutput";
         }
     }
 }

@@ -25,7 +25,7 @@ public class BusinessRepository : IBusinessRepository
         throw new NotImplementedException();
     }
 
-    public Task Delete(Business entity)
+    public Task<int> Delete(Business entity)
     {
         throw new NotImplementedException();
     }

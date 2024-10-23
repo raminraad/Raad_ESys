@@ -11,6 +11,5 @@ public class GenerateBusinessFormUrlMapper : Profile
     public GenerateBusinessFormUrlMapper()
     {
         CreateMap<GenerateJwtForBusinessFormRequest, GenerateJwtForBusinessFormCommand>().ReverseMap();
-        CreateMap<AthorizeBusinessClientRequest, AthorizeBusinessClientCommand>().ReverseMap();
     }
 }

@@ -33,9 +33,6 @@ namespace ESys.API.EndPoints.BusinessForm.CalculateBusinessForm
         /// <param name="ct">Cancellation token</param>
         public override async Task HandleAsync(List<JsonObject> req, CancellationToken ct)
         {
-            
-            var user = HttpContext.User;
-
             try
             {
                 
