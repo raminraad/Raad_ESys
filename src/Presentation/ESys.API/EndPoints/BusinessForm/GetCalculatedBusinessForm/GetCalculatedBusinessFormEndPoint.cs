@@ -11,6 +11,9 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
     /// </summary>
     public class GetCalculatedBusinessFormEndPoint : Endpoint<List<JsonObject>,GetCalculatedBusinessFormQueryResponse>
     {
+        
+
+        
         private readonly IMediator _mediator;
 
         public GetCalculatedBusinessFormEndPoint(IMediator mediator)
@@ -31,6 +34,9 @@ namespace ESys.API.EndPoints.BusinessForm.GetCalculatedBusinessForm
         /// <param name="ct">Cancellation token</param>
         public override async Task HandleAsync(List<JsonObject> req, CancellationToken ct)
         {
+            
+            var user = HttpContext.User;
+
             try
             {
                 

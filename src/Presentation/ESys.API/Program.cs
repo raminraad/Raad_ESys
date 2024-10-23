@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using System.Text;
 using ESys.API.Middleware;
 using ESys.API.OptionsSetup;
 using ESys.Persistence;
@@ -7,8 +9,11 @@ using ESys.Application;
 using ESys.Libraries;
 using ESys.API.Profiles.AutoMappers;
 using ESys.Application.Abstractions.Services.BusinessForm;
+using ESys.Libraries.JWT;
 using FastEndpoints.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,23 +66,63 @@ builder.Services.AddAutoMapper(typeof(GenerateBusinessFormUrlMapper));
 
 #endregion
 
+
+
 #region Jwt
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+builder.Services.AddAuthentication().AddJwtBearer();
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
-builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
-// builder.Services.AddAuthenticationJwtBearer(s => s.SigningKey = "This-is-a-complicated-secret-key-for-EPaad-JWT-!@65#5$#6$%%5_^*1(0^&*(%_^6541&#$@!@_#55$321!@");
+builder.Services.AddTransient<IConfigureOptions<JwtBearerOptions>, ConfigureJWTBearerOptions>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+        .RequireAuthenticatedUser()
+        .Build();
+    options.AddPolicy("client", p => p.RequireRole("client"));
+});
 
-// builder.Services.AddAuthenticationJwtBearer(
-//     _ =>
+#endregion
+
+// JWT Configuration which works fine
+
+#region new jwt
+
+// builder.Services.AddAuthentication(options =>
 //     {
-//         
-//     },
-//     _ =>
+//         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//     })
+//     .AddJwtBearer(options =>
 //     {
+//         options.Authority = "https://localhost:5006";
+//         options.RequireHttpsMetadata = false;
+//         options.SaveToken = true;
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuerSigningKey = true,
+//             ValidIssuer = "issuer",
+//             ValidAudience = ("audience"),
+//             ValidateLifetime = true,
+//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(("ThisIsMySecretKeyWhichShouldBeReplacedWithAComplexOne")!)),
+//             ClockSkew = TimeSpan.Zero,
+//             ValidateAudience = true,
+//             ValidateIssuer = true,
+//             IgnoreTrailingSlashWhenValidatingAudience = true,
+//             
+//         };
 //     });
-builder.Services.AddAuthorization(o=>{o.AddPolicy("user",p=>p.RequireClaim("name"));});
+
+
+// builder.Services.AddAuthorization(options =>
+// {
+//     options.DefaultPolicy = new AuthorizationPolicyBuilder()
+//         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+//         .RequireAuthenticatedUser()
+//         .Build();
+//
+// });
 #endregion
 
 builder.Services.AddTransient<BusinessFormCalculator>();
@@ -92,6 +137,13 @@ if (app.Environment.IsDevelopment())
     // app.UseSwaggerUI();
     app.UseCors("ESysCorsPolicy");
 }
+
+// var claims = new List<Claim>();
+// claims.Add(new Claim("usr","anton"));
+// var identity = new ClaimsIdentity(claims,"bearer");
+// var user = new ClaimsPrincipal(identity);
+
+ 
 
 app.UseHttpsRedirection();
 // app.UseCustomExceptionHandler();

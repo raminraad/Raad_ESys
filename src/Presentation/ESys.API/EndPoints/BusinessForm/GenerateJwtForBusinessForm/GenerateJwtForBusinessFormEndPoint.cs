@@ -33,7 +33,6 @@ namespace ESys.API.EndPoints.BusinessForm.GenerateJwtForBusinessForm
         /// <param name="ct">Cancellation token</param>
         public override async Task HandleAsync(GenerateJwtForBusinessFormRequest req, CancellationToken ct)
         {
-            var user = HttpContext.User;
             
             try
             {

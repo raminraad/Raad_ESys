@@ -19,7 +19,8 @@ namespace ESys.API.EndPoints.BusinessForm.GetInitialBusinessForm
         public override void Configure()
         {
             Get("/business/initialize/{BusinessId}");
-            AllowAnonymous();
+            // AllowAnonymous();
+           Policies("authenticated-user"); 
         }
 
         /// <summary>

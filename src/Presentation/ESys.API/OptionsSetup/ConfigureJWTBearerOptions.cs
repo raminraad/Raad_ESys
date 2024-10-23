@@ -1,5 +1,5 @@
+using System.Security.Claims;
 using System.Text;
-using ESys.Libraries;
 using ESys.Libraries.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -7,17 +7,29 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ESys.API.OptionsSetup;
 
-public class JwtBearerOptionsSetup : IConfigureOptions<JwtBearerOptions>
+public class ConfigureJWTBearerOptions : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly JwtOptions _jwtOptions;
+    private readonly ILogger _logger;
 
-    public JwtBearerOptionsSetup(IOptions<JwtOptions> jwtOptions)
+    public ConfigureJWTBearerOptions(IOptions<JwtOptions> jwtOptions, ILogger<ConfigureJWTBearerOptions> logger)
     {
-        _jwtOptions = jwtOptions.Value;
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _jwtOptions = jwtOptions?.Value ?? throw new ArgumentNullException(nameof(jwtOptions));
     }
 
     public void Configure(JwtBearerOptions options)
     {
+        // This method will NOT be called.
+        _logger.LogInformation("No name Configure called of {className}", nameof(ConfigureJWTBearerOptions));
+        Configure(JwtBearerDefaults.AuthenticationScheme, options);
+    }
+
+    public void Configure(string name, JwtBearerOptions options)
+    {
+        _logger.LogInformation("{name}.{methodName} is called. Policy name: {policyName}",
+            nameof(ConfigureJWTBearerOptions), nameof(Configure), name);
+        
         options.Authority = _jwtOptions.Authority;
         
         options.Events = new JwtBearerEvents
@@ -45,17 +57,22 @@ public class JwtBearerOptionsSetup : IConfigureOptions<JwtBearerOptions>
                 }
             }
         };
-        options.TokenValidationParameters = new()
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+        
+        options.TokenValidationParameters = new TokenValidationParameters
+        { 
             ValidIssuer = _jwtOptions.Issuer,
+            ValidateIssuer = true,
+
             ValidAudience = _jwtOptions.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_jwtOptions.SecretKey))
+            ValidateAudience = true,
+
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey)),
+            ValidateIssuerSigningKey = true,
             
+            ValidateLifetime = true,
+            
+            NameClaimType = ClaimTypes.Name,
+            RoleClaimType = ClaimTypes.Role,
         };
     }
 }

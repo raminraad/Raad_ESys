@@ -28,12 +28,11 @@ public sealed class JwtProvider : IJwtProvider
     {
         var claims = new Claim[]
         {
-            new(JwtRegisteredClaimNames.NameId, "my-name"), //todo: change to valid value
+            new(JwtRegisteredClaimNames.NameId, "client-name"), //todo: change to valid value
+            new("role", "client"), //todo: change to valid value
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         
-            new(JwtRegisteredClaimNames.Sub, "Albert"), // todo: change to business holder name
-            new("client-session-id", req.ClientSessionId),
-            new("total-session-counter", "200"), // todo: replace from db fetch
+            new(JwtRegisteredClaimNames.Sub, "client-name"), // todo: change to business holder name
         };
         var token = new JwtSecurityToken(
             _options.Issuer,
