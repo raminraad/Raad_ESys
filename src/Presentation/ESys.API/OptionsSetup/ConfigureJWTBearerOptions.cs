@@ -70,6 +70,7 @@ public class ConfigureJWTBearerOptions : IConfigureNamedOptions<JwtBearerOptions
             ValidateIssuerSigningKey = true,
             
             ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero,
             
             NameClaimType = ClaimTypes.Name,
             RoleClaimType = ClaimTypes.Role,

@@ -20,7 +20,7 @@ namespace ESys.API.EndPoints.BusinessForm.GetInitialBusinessForm
         {
             Get("/business/initialize/{BusinessId}");
             // AllowAnonymous();
-           Policies("authenticated-user"); 
+           Roles("client"); 
         }
 
         /// <summary>
